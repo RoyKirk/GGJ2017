@@ -1,0 +1,1 @@
+Direction,colour,Strength,speed,time(delay)
