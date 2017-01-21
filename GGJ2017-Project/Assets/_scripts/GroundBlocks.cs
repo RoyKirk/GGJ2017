@@ -19,6 +19,7 @@ public class GroundBlocks : MonoBehaviour
     public float currentResetTimer = 0;
 
     public GameObject BuildingBlock;
+    public Drone myAssignedDrone;
 
     Material Mat;
 
@@ -94,6 +95,13 @@ public class GroundBlocks : MonoBehaviour
         //change Has building bool.
         Instantiate(BuildingBlock, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
         canBuildOn = false;
+    }
+
+    public void CancelOrder()
+    {
+        assignedTask = false;
+        myAssignedDrone.CancelOrder();
+        myAssignedDrone = null;
     }
 
     void Flash(Material resultMat)

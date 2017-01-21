@@ -60,6 +60,21 @@ public class AgentHandler : MonoBehaviour
             }
         }
 
+        if (Input.GetMouseButtonDown(2))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                GroundBlocks currentblock = hit.transform.gameObject.GetComponent<GroundBlocks>();
+                if (currentblock.assignedTask == true)
+                {
+                    currentblock.CancelOrder();
+                }
+            }
+        }
+
         SpawnDrones();
 
         foreach (Drone currentDrone in myDrones)
@@ -69,6 +84,7 @@ public class AgentHandler : MonoBehaviour
             {
                 currentDrone.myState = Drone.DroneState.Dig;
                 currentDrone.SetDestination(digOrders[0]);
+                digOrders[0].myAssignedDrone = currentDrone;
                 digOrders.RemoveAt(0);
                 continue;
             }
@@ -79,6 +95,7 @@ public class AgentHandler : MonoBehaviour
                 {
                     currentDrone.myState = Drone.DroneState.Build;
                     currentDrone.SetDestination(buildOrders[0]);
+                    buildOrders[0].myAssignedDrone = currentDrone;
                     buildOrders.RemoveAt(0);
                     continue;
                 }
@@ -87,6 +104,7 @@ public class AgentHandler : MonoBehaviour
                 {
                     currentDrone.myState = Drone.DroneState.Build;
                     currentDrone.SetDestination(buildOrders[0]);
+                    buildOrders[0].myAssignedDrone = currentDrone;
                     buildOrders.RemoveAt(0);
                     continue;
                 }
