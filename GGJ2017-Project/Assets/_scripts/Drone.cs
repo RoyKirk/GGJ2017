@@ -157,4 +157,16 @@ public class Drone : MonoBehaviour
         AgentHandler.myDrones.Remove(this);
         Destroy(this.gameObject);
     }
+
+    public void CancelOrder()
+    {
+        if (isCarryingResource)
+        {
+            myState = DroneState.Gather;
+        }
+        else
+        {
+            myState = DroneState.Idle;
+        }
+    }
 }
