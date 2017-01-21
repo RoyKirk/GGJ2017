@@ -20,27 +20,47 @@ public class GroundBlocks : MonoBehaviour
 
     public GameObject BuildingBlock;
 
+    Material Mat;
+
     public Material DefaultMat;
     public Material ScorchedMat;
     public Material HarvestedMat;
+    public Material FlashMat;
+
+    //flash variables
+    public int timesFlashed;
+    public float durationOfFlash;
+    public float currentFlashDuration;
+    public float timeBetweenFlash;
+    public float currentTimeBetweenFlash;
+
+
+    //times flashed
+    //duration of flash
+    //time between flash
 
     // Use this for initialization
     void Start ()
     {
-	    
-	}
+        Mat = GetComponent<Renderer>().material;
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if(currentResetTimer > 0)
+
+        if (currentResetTimer > 0)
         {
             currentResetTimer -= Time.deltaTime;
+            Flash(DefaultMat);
+            Mat = DefaultMat;
         }
         else
         {
             Depleted = false;
-            GetComponent<Renderer>().material = DefaultMat;
+            
+            //Mat = DefaultMat;
         }
 
 	    if(scorched)
@@ -48,7 +68,7 @@ public class GroundBlocks : MonoBehaviour
             if(MaxScorchedTimer > currentResetTimer)
             {
                 currentResetTimer = MaxScorchedTimer;
-                GetComponent<Renderer>().material = ScorchedMat;
+                Mat = ScorchedMat;
             }
             scorched = false;
             Depleted = true;
@@ -59,7 +79,8 @@ public class GroundBlocks : MonoBehaviour
             if(MaxHarvestTimer > currentResetTimer)
             {
                 currentResetTimer = MaxHarvestTimer;
-                GetComponent<Renderer>().material = HarvestedMat;
+                Mat = HarvestedMat;
+                //Flash(HarvestedMat);
             }
             harvested = false;
             Depleted = true;
@@ -73,6 +94,50 @@ public class GroundBlocks : MonoBehaviour
         //change Has building bool.
         Instantiate(BuildingBlock, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
         canBuildOn = false;
+    }
+
+    void Flash(Material resultMat)
+    {
+        //times flashed
+        //duration of flash
+        //time between flash
+
+        //for (int i = 0; i < timesFlashed; i++)
+        //{
+        //    
+        //    if(currentFlashDuration > 0)
+        //    {
+        //        currentFlashDuration -= Time.deltaTime;
+        //        Mat = FlashMat;
+        //    }
+        //    else
+        //    {
+        //        Mat = resultMat;
+        //    }
+        //}
+
+        if (currentFlashDuration > 0)
+        {
+            currentFlashDuration -= Time.deltaTime;
+            Mat = FlashMat;
+        }
+        else if(currentTimeBetweenFlash > 0)
+        {
+            currentTimeBetweenFlash -= Time.deltaTime;
+            Mat = resultMat;
+        }
+        else if(currentFlashDuration <= 0)
+        {
+            currentTimeBetweenFlash = timeBetweenFlash;
+        }
+        else if(currentTimeBetweenFlash <= 0)
+        {
+            currentFlashDuration = durationOfFlash;
+        }
+        
+
+
+
     }
 }
 
