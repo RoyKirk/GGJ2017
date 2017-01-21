@@ -121,10 +121,21 @@ public class LASERSegmentScript : MonoBehaviour {
             //Destroy(collider.gameObject);
             //Destroy(gameObject);
         }
-        else
+        if (collider.tag == "Drone")
         {
+            collider.gameObject.GetComponent<Drone>().KillDrone();
+        }
+        if (collider.tag == "Building")
+        {
+            //Destroy(collider.gameObject);
             Destroy(gameObject);
         }
+        if (collider.tag == "Hive")
+        {
+            Destroy(collider.gameObject);
+            Destroy(gameObject);
+        }
+
     }
 
     void OnTriggerEnter(Collider other)
