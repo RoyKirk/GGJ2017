@@ -40,6 +40,7 @@ public class AgentHandler : MonoBehaviour
                 {
                     buildOrders.Add(currentblock);
                     currentblock.assignedTask = true;
+                    currentblock.buildAnimator.SetActive(true);
                 }
             }
         }
@@ -56,6 +57,7 @@ public class AgentHandler : MonoBehaviour
                 {
                     digOrders.Add(currentblock);
                     currentblock.assignedTask = true;
+                    currentblock.gatherAnimator.SetActive(true);
                 }
             }
         }
@@ -71,6 +73,7 @@ public class AgentHandler : MonoBehaviour
                 if (currentblock.assignedTask == true)
                 {
                     currentblock.CancelOrder();
+                    currentblock.cancelAnimator.SetActive(true);
                 }
             }
         }
