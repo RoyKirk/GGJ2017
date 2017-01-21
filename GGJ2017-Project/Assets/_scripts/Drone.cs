@@ -146,4 +146,10 @@ public class Drone : MonoBehaviour
             Instantiate(footStepPrefab, transform.position, transform.rotation);
         }
     }
+
+    public void KillDrone()
+    {
+        AgentHandler.myDrones.Remove(this);
+        Destroy(this.gameObject);
+    }
 }

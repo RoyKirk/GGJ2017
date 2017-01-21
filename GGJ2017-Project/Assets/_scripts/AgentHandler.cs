@@ -8,7 +8,13 @@ public class AgentHandler : MonoBehaviour
     public static List<Transform> digOrders = new List<Transform>();
     public static List<Transform> buildOrders = new List<Transform>();
 
+    public GameObject dronePrefab;
+
     public static int resourcesInBase;
+
+    public int maxDrones;
+    public float droneSpawnDelay;
+    float droneSpawnTimer;
 
     // Use this for initialization
     void Awake ()
@@ -44,6 +50,8 @@ public class AgentHandler : MonoBehaviour
             }
         }
 
+        SpawnDrones();
+
         foreach (Drone currentDrone in myDrones)
         {
             currentDrone.myBaseLocation = transform.position;
@@ -72,6 +80,20 @@ public class AgentHandler : MonoBehaviour
                     buildOrders.RemoveAt(0);
                     continue;
                 }
+            }
+        }
+    }
+
+    void SpawnDrones()
+    {  
+        if (myDrones.Count < maxDrones)
+        {
+            droneSpawnTimer += Time.deltaTime;
+
+            if (droneSpawnTimer >= droneSpawnDelay)
+            {
+                Instantiate(dronePrefab, transform.position, transform.rotation);
+                droneSpawnTimer = 0;
             }
         }
     }
