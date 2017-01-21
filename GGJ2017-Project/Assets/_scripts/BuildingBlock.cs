@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BuildingBlock : MonoBehaviour {
+public class BuildingBlock : MonoBehaviour
+{
+    public int health;
+
+    public GroundBlocks myLocation;
 
 	// Use this for initialization
 	void Start () {
@@ -9,9 +13,20 @@ public class BuildingBlock : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+	void Update ()
+    {
+
+    }
+
+    public void TakeDamage()
+    {
+        --health;
+        if (health <= 0)
+        {
+            myLocation.canBuildOn = true;
+            Destroy(this.gameObject);
+        }
+    }
 }
 
 //when destroyed change bool of HasBuilding of block below this building.

@@ -129,8 +129,12 @@ public class LASERSegmentScript : MonoBehaviour {
         }
         if (collider.tag == "Building")
         {
-            //collider.gameObject.GetComponent<GroundBlocks>().Damage();
+            collider.gameObject.GetComponent<BuildingBlock>().TakeDamage();
             Destroy(gameObject);
+        }
+        if (collider.tag == "Ground")
+        {
+            collider.gameObject.GetComponent<GroundBlocks>().scorched = true;
         }
         if (collider.tag == "Hive")
         {

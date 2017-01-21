@@ -3,7 +3,6 @@ using System.Collections;
 
 public class GroundBlocks : MonoBehaviour
 {
-
     public bool Depleted;//check this to see if you can harvest it
 
     
@@ -102,7 +101,10 @@ public class GroundBlocks : MonoBehaviour
     {
         //instantiate a block on top of this one. 
         //change Has building bool.
-        Instantiate(BuildingBlock, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
+        BuildingBlock newBuilding;
+        GameObject tempBuilding = (GameObject)Instantiate(BuildingBlock, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
+        newBuilding = tempBuilding.GetComponent<BuildingBlock>();
+        newBuilding.myLocation = this;
         canBuildOn = false;
     }
 
@@ -167,10 +169,6 @@ public class GroundBlocks : MonoBehaviour
         //{
         //    currentFlashDuration = durationOfFlash;
         //}
-
-
-
-
     }
 }
 
