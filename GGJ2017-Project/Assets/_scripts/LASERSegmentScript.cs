@@ -47,7 +47,7 @@ public class LASERSegmentScript : MonoBehaviour {
             deathTimer += Time.deltaTime;
             if(deathTimer >= deathTime)
             {
-                Destroy(gameObject);
+                Destroy(gameObject.transform.parent.gameObject);
             }
             GetComponent<MeshRenderer>().enabled = true;
             if (dir == Direction.NORTH)
@@ -70,4 +70,14 @@ public class LASERSegmentScript : MonoBehaviour {
 
 	
 	}
+    void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+        if (other.tag == "laser")
+        {
+            Destroy(other.gameObject);
+            //Destroy(gameObject);
+        }
+
+    }
 }

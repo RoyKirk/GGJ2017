@@ -5,10 +5,16 @@ using System.Collections.Generic;
 public class AgentHandler : MonoBehaviour
 {
     public static List<Drone> myDrones = new List<Drone>();
-    public static List<Transform> digOrders = new List<Transform>();
-    public static List<Transform> buildOrders = new List<Transform>();
+    public static List<GroundBlocks> digOrders = new List<GroundBlocks>();
+    public static List<GroundBlocks> buildOrders = new List<GroundBlocks>();
+
+    public GameObject dronePrefab;
 
     public static int resourcesInBase;
+
+    public int maxDrones;
+    public float droneSpawnDelay;
+    float droneSpawnTimer;
 
     // Use this for initialization
     void Awake ()
@@ -29,7 +35,12 @@ public class AgentHandler : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100f))
             {
-                buildOrders.Add(hit.transform);
+                GroundBlocks currentblock = hit.transform.gameObject.GetComponent<GroundBlocks>();
+                if (currentblock.assignedTask == false && currentblock.canBuildOn == true)
+                {
+                    buildOrders.Add(currentblock);
+                    currentblock.assignedTask = true;
+                }
             }
         }
 
@@ -40,9 +51,16 @@ public class AgentHandler : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100f))
             {
-                digOrders.Add(hit.transform);
+                GroundBlocks currentblock = hit.transform.gameObject.GetComponent<GroundBlocks>();
+                if (currentblock.assignedTask == false && currentblock.Depleted == false)
+                {
+                    digOrders.Add(currentblock);
+                    currentblock.assignedTask = true;
+                }
             }
         }
+
+        SpawnDrones();
 
         foreach (Drone currentDrone in myDrones)
         {
@@ -50,7 +68,7 @@ public class AgentHandler : MonoBehaviour
             if (digOrders.Count > 0 && currentDrone.myState == Drone.DroneState.Idle)
             {
                 currentDrone.myState = Drone.DroneState.Dig;
-                currentDrone.SetDestination(digOrders[0].position);
+                currentDrone.SetDestination(digOrders[0]);
                 digOrders.RemoveAt(0);
                 continue;
             }
@@ -60,7 +78,7 @@ public class AgentHandler : MonoBehaviour
                 if (currentDrone.myState == Drone.DroneState.Gather)
                 {
                     currentDrone.myState = Drone.DroneState.Build;
-                    currentDrone.SetDestination(buildOrders[0].position);
+                    currentDrone.SetDestination(buildOrders[0]);
                     buildOrders.RemoveAt(0);
                     continue;
                 }
@@ -68,10 +86,24 @@ public class AgentHandler : MonoBehaviour
                 else if (currentDrone.myState == Drone.DroneState.Idle && resourcesInBase > 0)
                 {
                     currentDrone.myState = Drone.DroneState.Build;
-                    currentDrone.SetDestination(buildOrders[0].position);
+                    currentDrone.SetDestination(buildOrders[0]);
                     buildOrders.RemoveAt(0);
                     continue;
                 }
+            }
+        }
+    }
+
+    void SpawnDrones()
+    {  
+        if (myDrones.Count < maxDrones)
+        {
+            droneSpawnTimer += Time.deltaTime;
+
+            if (droneSpawnTimer >= droneSpawnDelay)
+            {
+                Instantiate(dronePrefab, transform.position, transform.rotation);
+                droneSpawnTimer = 0;
             }
         }
     }

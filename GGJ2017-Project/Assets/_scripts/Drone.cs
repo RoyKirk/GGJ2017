@@ -7,7 +7,7 @@ public class Drone : MonoBehaviour
     public enum DroneState {Idle, Gather, Dig, Build}
     public DroneState myState;
     NavMeshAgent myAgent;
-    Vector3 myDestination;
+    GroundBlocks myDestination;
     public Vector3 myBaseLocation;
 
     public GameObject footStepPrefab;
@@ -27,6 +27,7 @@ public class Drone : MonoBehaviour
     {
         myState = DroneState.Idle;
         myAgent = GetComponent<NavMeshAgent>();
+        myAgent.avoidancePriority = Random.Range(50, 100);
         AgentHandler.myDrones.Add(this);
 	}
 	
@@ -57,11 +58,11 @@ public class Drone : MonoBehaviour
                 }
                 break;
             case DroneState.Dig:
-                if (Vector3.Distance(transform.position, myDestination) > 1.0f)
+                if (Vector3.Distance(transform.position, myDestination.transform.position) > 1.0f)
                 {
-                    if (myAgent.destination != myDestination)
+                    if (myAgent.destination != myDestination.transform.position)
                     {
-                        myAgent.SetDestination(myDestination);
+                        myAgent.SetDestination(myDestination.transform.position);
                     }
                 }
                 else
@@ -75,17 +76,19 @@ public class Drone : MonoBehaviour
                         myDigTime = 0;
                         isCarryingResource = true;
                         myState = DroneState.Gather;
+                        myDestination.harvested = true;
+                        myDestination.assignedTask = false;
                     }
                 }
                 break;
             case DroneState.Build:
                 if (isCarryingResource == true)
                 {
-                    if (Vector3.Distance(transform.position, myDestination) > 1.0f)
+                    if (Vector3.Distance(transform.position, myDestination.transform.position) > 1.0f)
                     {
-                        if (myAgent.destination != myDestination)
+                        if (myAgent.destination != myDestination.transform.position)
                         {
-                            myAgent.SetDestination(myDestination);
+                            myAgent.SetDestination(myDestination.transform.position);
                         }
                     }
 
@@ -100,6 +103,8 @@ public class Drone : MonoBehaviour
                             myBuildTime = 0;
                             isCarryingResource = false;
                             myState = DroneState.Idle;
+                            myDestination.assignedTask = false;
+                            myDestination.CreateBuilding();
                         }
                     }
                 }
@@ -129,7 +134,7 @@ public class Drone : MonoBehaviour
         SpawnFootstep();
 	}
 
-    public void SetDestination(Vector3 destination)
+    public void SetDestination(GroundBlocks destination)
     {
         myDestination = destination;
     }
@@ -145,5 +150,11 @@ public class Drone : MonoBehaviour
             footStepTimer = 0;
             Instantiate(footStepPrefab, transform.position, transform.rotation);
         }
+    }
+
+    public void KillDrone()
+    {
+        AgentHandler.myDrones.Remove(this);
+        Destroy(this.gameObject);
     }
 }
