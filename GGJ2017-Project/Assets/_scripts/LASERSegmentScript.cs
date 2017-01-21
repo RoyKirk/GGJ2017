@@ -30,7 +30,7 @@ public class LASERSegmentScript : MonoBehaviour {
     public float speed = 1.0f;
     public float delay = 1.0f;
     public float delayTimer = 0.0f;
-    float deathTime = 20.0f;
+    float deathTime = 300.0f;
     float deathTimer = 0.0f;
 
 
