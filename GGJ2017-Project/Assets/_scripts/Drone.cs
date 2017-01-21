@@ -77,6 +77,7 @@ public class Drone : MonoBehaviour
                         isCarryingResource = true;
                         myState = DroneState.Gather;
                         myDestination.harvested = true;
+                        myDestination.gatherAnimator.SetActive(false);
                         myDestination.assignedTask = false;
                     }
                 }
@@ -103,6 +104,7 @@ public class Drone : MonoBehaviour
                             myBuildTime = 0;
                             isCarryingResource = false;
                             myState = DroneState.Idle;
+                            myDestination.buildAnimator.SetActive(false);
                             myDestination.assignedTask = false;
                             myDestination.CreateBuilding();
                         }
