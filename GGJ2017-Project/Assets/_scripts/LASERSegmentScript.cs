@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LASERSegmentScript : MonoBehaviour {
 
@@ -83,7 +84,7 @@ public class LASERSegmentScript : MonoBehaviour {
                 {
                     CollisionChecks(hit.collider);
                 }
-                transform.position += new Vector3(0, 0, 5) * speed * Time.deltaTime;
+                transform.position += new Vector3(0, 0, 1) * speed * Time.deltaTime;
             }
             if (dir == Direction.SOUTH)
             {
@@ -91,7 +92,7 @@ public class LASERSegmentScript : MonoBehaviour {
                 {
                     CollisionChecks(hit.collider);
                 }
-                transform.position += new Vector3(0, 0, -5) * speed * Time.deltaTime;
+                transform.position += new Vector3(0, 0, -1) * speed * Time.deltaTime;
             }
             if (dir == Direction.EAST)
             {
@@ -99,7 +100,7 @@ public class LASERSegmentScript : MonoBehaviour {
                 {
                     CollisionChecks(hit.collider);
                 }
-                transform.position += new Vector3(5, 0, 0) * speed * Time.deltaTime;
+                transform.position += new Vector3(1, 0, 0) * speed * Time.deltaTime;
             }
             if (dir == Direction.WEST)
             {
@@ -107,13 +108,14 @@ public class LASERSegmentScript : MonoBehaviour {
                 {
                     CollisionChecks(hit.collider);
                 }
-                transform.position += new Vector3(-5, 0, 0) * speed * Time.deltaTime;
+                transform.position += new Vector3(-1, 0, 0) * speed * Time.deltaTime;
             }
         }
 
 	
 	}
 
+    //all destruction and function calls
     private void CollisionChecks(Collider collider)
     {
         if (collider.tag == "laser")
@@ -121,10 +123,29 @@ public class LASERSegmentScript : MonoBehaviour {
             //Destroy(collider.gameObject);
             //Destroy(gameObject);
         }
-        else
+        if (collider.tag == "Drone")
         {
+            collider.gameObject.GetComponent<Drone>().KillDrone();
+        }
+        if (collider.tag == "Building")
+        {
+            //collider.gameObject.GetComponent<GroundBlocks>().Damage();
             Destroy(gameObject);
         }
+        if (collider.tag == "Hive")
+        {
+            Destroy(collider.gameObject);
+            
+            StartCoroutine(RestartLevel());
+
+            //Destroy(gameObject);
+        }
+
+    }
+    IEnumerator RestartLevel()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void OnTriggerEnter(Collider other)
