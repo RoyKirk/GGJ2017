@@ -44,11 +44,15 @@ public class LaserSpawnScript : LASERSegmentScript {
 
     // Use this for initialization
 	void Start () {
+
+        //script new lasers
         spawns.Add(new LaserSpawn(W, yellow, 1, 1, 20));
         spawns.Add(new LaserSpawn(E, red, 1, 2, 25));
         spawns.Add(new LaserSpawn(S, blue, 1, 3, 20));
         spawns.Add(new LaserSpawn(N, purple, 1, 1, 30));
         spawns.Add(new LaserSpawn(E, green, 1, 2, 35));
+
+
 
 
         foreach(LaserSpawn ls in spawns)
