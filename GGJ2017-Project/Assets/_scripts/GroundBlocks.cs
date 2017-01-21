@@ -22,6 +22,7 @@ public class GroundBlocks : MonoBehaviour
     public GameObject buildAnimator;
     public GameObject gatherAnimator;
     public GameObject cancelAnimator;
+    public GameObject flashAnimator;
     public Drone myAssignedDrone;
 
     Material Mat;
@@ -63,11 +64,11 @@ public class GroundBlocks : MonoBehaviour
             GetComponent<Renderer>().material = HarvestedMat;
             currentFlashDuration = durationOfFlash;
         }
-        else
+        else if (Depleted)
         {
             Depleted = false;
             GetComponent<Renderer>().material = DefaultMat;
-            //add flash animation
+            flashAnimator.SetActive(true);
             //Mat = DefaultMat;
         }
 
