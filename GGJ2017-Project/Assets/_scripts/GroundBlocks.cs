@@ -34,6 +34,7 @@ public class GroundBlocks : MonoBehaviour
     public float currentFlashDuration;
     public float timeBetweenFlash;
     public float currentTimeBetweenFlash;
+    bool flashing = false;
 
 
     //times flashed
@@ -44,18 +45,20 @@ public class GroundBlocks : MonoBehaviour
     void Start ()
     {
         Mat = GetComponent<Renderer>().material;
-
+        flashing = true;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        Flash();
 
         if (currentResetTimer > 0)
         {
             currentResetTimer -= Time.deltaTime;
-            Flash(DefaultMat);
-            Mat = DefaultMat;
+            //Flash(DefaultMat);
+            //Mat = DefaultMat;
+            currentFlashDuration = durationOfFlash;
         }
         else
         {
@@ -80,7 +83,8 @@ public class GroundBlocks : MonoBehaviour
             if(MaxHarvestTimer > currentResetTimer)
             {
                 currentResetTimer = MaxHarvestTimer;
-                Mat = HarvestedMat;
+                //Mat = HarvestedMat;
+                currentFlashDuration = durationOfFlash;
                 //Flash(HarvestedMat);
             }
             harvested = false;
@@ -106,6 +110,17 @@ public class GroundBlocks : MonoBehaviour
 
     void Flash(Material resultMat)
     {
+        if(currentFlashDuration > 0)
+        {
+            Mat = FlashMat;
+            
+        }
+        else
+        {
+            Mat = DefaultMat;
+        }
+        currentFlashDuration -= Time.deltaTime;
+
         //times flashed
         //duration of flash
         //time between flash
@@ -124,25 +139,25 @@ public class GroundBlocks : MonoBehaviour
         //    }
         //}
 
-        if (currentFlashDuration > 0)
-        {
-            currentFlashDuration -= Time.deltaTime;
-            Mat = FlashMat;
-        }
-        else if(currentTimeBetweenFlash > 0)
-        {
-            currentTimeBetweenFlash -= Time.deltaTime;
-            Mat = resultMat;
-        }
-        else if(currentFlashDuration <= 0)
-        {
-            currentTimeBetweenFlash = timeBetweenFlash;
-        }
-        else if(currentTimeBetweenFlash <= 0)
-        {
-            currentFlashDuration = durationOfFlash;
-        }
-        
+        //if (currentFlashDuration > 0)
+        //{
+        //    currentFlashDuration -= Time.deltaTime;
+        //    Mat = FlashMat;
+        //}
+        //else if(currentTimeBetweenFlash > 0)
+        //{
+        //    currentTimeBetweenFlash -= Time.deltaTime;
+        //    Mat = resultMat;
+        //}
+        //else if(currentFlashDuration <= 0)
+        //{
+        //    currentTimeBetweenFlash = timeBetweenFlash;
+        //}
+        //else if(currentTimeBetweenFlash <= 0)
+        //{
+        //    currentFlashDuration = durationOfFlash;
+        //}
+
 
 
 
