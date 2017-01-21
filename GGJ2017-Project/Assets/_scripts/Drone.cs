@@ -12,6 +12,9 @@ public class Drone : MonoBehaviour
 
     public GameObject footStepPrefab;
 
+    public Material defaultMat;
+    public Material resourceMat;
+
     public bool isCarryingResource;
 
     public float buildTime;
@@ -33,6 +36,23 @@ public class Drone : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update ()
+    {
+
+        UpdateState();
+        SpawnFootstep();
+
+        if (isCarryingResource)
+        {
+            GetComponent<Renderer>().material = resourceMat;
+        }
+
+        else
+        {
+            GetComponent<Renderer>().material = defaultMat;
+        }
+	}
+
+    public void UpdateState()
     {
         switch (myState)
         {
@@ -132,9 +152,7 @@ public class Drone : MonoBehaviour
             default:
                 break;
         }
-
-        SpawnFootstep();
-	}
+    }
 
     public void SetDestination(GroundBlocks destination)
     {
