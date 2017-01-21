@@ -28,12 +28,14 @@ public class LASERSegmentScript : MonoBehaviour {
     public float speed = 1.0f;
     public float delay = 1.0f;
     public float delayTimer = 0.0f;
+    float deathTime = 10.0f;
+    float deathTimer = 0.0f;
 
 
     // Use this for initialization
     void Start () {
-       
-	
+
+        GetComponent<MeshRenderer>().enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -42,13 +44,19 @@ public class LASERSegmentScript : MonoBehaviour {
         delayTimer += Time.deltaTime;
         if (delayTimer >= delay)
         {
+            deathTimer += Time.deltaTime;
+            if(deathTimer >= deathTime)
+            {
+                Destroy(gameObject);
+            }
+            GetComponent<MeshRenderer>().enabled = true;
             if (dir == Direction.NORTH)
             {
-                transform.position += new Vector3(0, -5, 0) * speed * Time.deltaTime;
+                transform.position += new Vector3(0, 0, 5) * speed * Time.deltaTime;
             }
             if (dir == Direction.SOUTH)
             {
-                transform.position += new Vector3(0, 5, 0) * speed * Time.deltaTime;
+                transform.position += new Vector3(0, 0, -5) * speed * Time.deltaTime;
             }
             if (dir == Direction.EAST)
             {
