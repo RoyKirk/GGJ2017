@@ -8,11 +8,16 @@ public class AgentHandler : MonoBehaviour
     public static List<Transform> digOrders = new List<Transform>();
     public static List<Transform> buildOrders = new List<Transform>();
 
+    public static int resourcesInBase;
+
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
-	    
-	}
+        myDrones.Clear();
+        digOrders.Clear();
+        buildOrders.Clear();
+        resourcesInBase = 0;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -41,6 +46,7 @@ public class AgentHandler : MonoBehaviour
 
         foreach (Drone currentDrone in myDrones)
         {
+            currentDrone.myBaseLocation = transform.position;
             if (digOrders.Count > 0 && currentDrone.myState == Drone.DroneState.Idle)
             {
                 currentDrone.myState = Drone.DroneState.Dig;
@@ -49,20 +55,24 @@ public class AgentHandler : MonoBehaviour
                 continue;
             }
 
-            if (buildOrders.Count > 0 && currentDrone.myState == Drone.DroneState.Gather)
+            if (buildOrders.Count > 0)
             {
-                currentDrone.myState = Drone.DroneState.Build;
-                currentDrone.SetDestination(buildOrders[0].position);
-                buildOrders.RemoveAt(0);
-                continue;
+                if (currentDrone.myState == Drone.DroneState.Gather)
+                {
+                    currentDrone.myState = Drone.DroneState.Build;
+                    currentDrone.SetDestination(buildOrders[0].position);
+                    buildOrders.RemoveAt(0);
+                    continue;
+                }
+
+                else if (currentDrone.myState == Drone.DroneState.Idle && resourcesInBase > 0)
+                {
+                    currentDrone.myState = Drone.DroneState.Build;
+                    currentDrone.SetDestination(buildOrders[0].position);
+                    buildOrders.RemoveAt(0);
+                    continue;
+                }
             }
-
-            //bring resources to base
-
-            //
         }
-        //check that tile has resources
-        //check that tile is reachable
-        //agent does thing
     }
 }
