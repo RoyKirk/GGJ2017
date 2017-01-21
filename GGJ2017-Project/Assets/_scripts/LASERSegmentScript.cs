@@ -118,8 +118,8 @@ public class LASERSegmentScript : MonoBehaviour {
     {
         if (collider.tag == "laser")
         {
-            Destroy(collider.gameObject);
-            Destroy(gameObject);
+            //Destroy(collider.gameObject);
+            //Destroy(gameObject);
         }
         else
         {

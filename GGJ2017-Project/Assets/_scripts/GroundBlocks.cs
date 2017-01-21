@@ -51,7 +51,7 @@ public class GroundBlocks : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        Flash();
+        //Flash();
 
         if (currentResetTimer > 0)
         {
