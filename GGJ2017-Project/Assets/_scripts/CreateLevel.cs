@@ -33,3 +33,11 @@ public class CreateLevel : MonoBehaviour
 	    
 	}
 }
+
+//block stuf
+
+//can be harvested
+//can be built on
+//function to make building
+//has building
+//buildings need navmesh obstacle component
