@@ -11,6 +11,7 @@ public class Drone : MonoBehaviour
     public Vector3 myBaseLocation;
 
     public GameObject footStepPrefab;
+    public ParticleSystem deathParticle;
 
     public Material defaultMat;
     public Material resourceMat;
@@ -96,6 +97,7 @@ public class Drone : MonoBehaviour
                         myDigTime = 0;
                         isCarryingResource = true;
                         myState = DroneState.Gather;
+                        myDestination.harvestParticle.Play();
                         myDestination.harvested = true;
                         myDestination.gatherAnimator.SetActive(false);
                         myDestination.assignedTask = false;
@@ -174,6 +176,7 @@ public class Drone : MonoBehaviour
 
     public void KillDrone()
     {
+        Instantiate(deathParticle);
         AgentHandler.myDrones.Remove(this);
         Destroy(this.gameObject);
     }

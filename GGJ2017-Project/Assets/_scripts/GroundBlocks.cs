@@ -23,6 +23,8 @@ public class GroundBlocks : MonoBehaviour
     public GameObject cancelAnimator;
     public GameObject flashAnimator;
     public Drone myAssignedDrone;
+    public ParticleSystem harvestParticle;
+    public ParticleSystem buildParticle;
 
     Material Mat;
 
@@ -105,6 +107,7 @@ public class GroundBlocks : MonoBehaviour
         GameObject tempBuilding = (GameObject)Instantiate(BuildingBlock, new Vector3(transform.position.x, 1, transform.position.z), Quaternion.identity);
         newBuilding = tempBuilding.GetComponent<BuildingBlock>();
         newBuilding.myLocation = this;
+        buildParticle.Play();
         canBuildOn = false;
     }
 
