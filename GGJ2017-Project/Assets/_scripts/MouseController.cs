@@ -18,11 +18,22 @@ public class MouseController : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, 100f))
             {
-                hit.transform.GetComponent<Renderer>().material.color = Random.ColorHSV();
-                Debug.Log("you selected the " + hit.transform.name);
+                hit.transform.GetComponent<GroundBlocks>().harvested = true;
+                //Debug.Log("you selected the " + hit.transform.name);
             }
         }
-        
-        
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                hit.transform.GetComponent<GroundBlocks>().CreateBuilding();
+                //Debug.Log("you selected the " + hit.transform.name);
+            }
+        }
+
     }
 }

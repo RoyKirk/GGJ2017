@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LASERSegmentScript : MonoBehaviour {
 
-    enum Direction
+    public enum Direction
     {
         NORTH,
         EAST,
@@ -12,21 +12,62 @@ public class LASERSegmentScript : MonoBehaviour {
 
     }
 
-    Direction dir = Direction.WEST;
+    public enum Colour
+    {
+        RED,
+        GREEN,
+        BLUE,
+        PURPLE,
+        YELLOW,
+    }
 
 
+    public Direction dir = Direction.WEST;
+    public Colour col = Colour.RED;
+    public float strength = 1.0f;
+    public float speed = 1.0f;
+    public float delay = 1.0f;
+    public float delayTimer = 0.0f;
+    float deathTime = 10.0f;
+    float deathTimer = 0.0f;
 
-	// Use this for initialization
-	void Start () {
-	
+
+    // Use this for initialization
+    void Start () {
+
+        GetComponent<MeshRenderer>().enabled = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if(dir == Direction.WEST)
+
+        delayTimer += Time.deltaTime;
+        if (delayTimer >= delay)
         {
-            transform.position += new Vector3(5,0,0) * Time.deltaTime;
+            deathTimer += Time.deltaTime;
+            if(deathTimer >= deathTime)
+            {
+                Destroy(gameObject);
+            }
+            GetComponent<MeshRenderer>().enabled = true;
+            if (dir == Direction.NORTH)
+            {
+                transform.position += new Vector3(0, 0, 5) * speed * Time.deltaTime;
+            }
+            if (dir == Direction.SOUTH)
+            {
+                transform.position += new Vector3(0, 0, -5) * speed * Time.deltaTime;
+            }
+            if (dir == Direction.EAST)
+            {
+                transform.position += new Vector3(5, 0, 0) * speed * Time.deltaTime;
+            }
+            if (dir == Direction.WEST)
+            {
+                transform.position += new Vector3(-5, 0, 0) * speed * Time.deltaTime;
+            }
         }
+
 	
 	}
 }
