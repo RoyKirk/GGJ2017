@@ -176,7 +176,7 @@ public class Drone : MonoBehaviour
 
     public void KillDrone()
     {
-        Instantiate(deathParticle);
+        Instantiate(deathParticle, transform.position, transform.rotation);
         AgentHandler.myDrones.Remove(this);
         Destroy(this.gameObject);
     }
