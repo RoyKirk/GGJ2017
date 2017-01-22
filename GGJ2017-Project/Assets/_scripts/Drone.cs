@@ -16,6 +16,11 @@ public class Drone : MonoBehaviour
     public GameObject walkAnimation;
     public GameObject resourceAnimation;
 
+    public AudioSource myAudio;
+    public AudioSource deathSound;
+    public AudioClip harvestSound;
+    public AudioClip buildSound;
+
     public bool isCarryingResource;
 
     public float buildTime;
@@ -92,6 +97,8 @@ public class Drone : MonoBehaviour
                         myDestination.harvested = true;
                         myDestination.gatherAnimator.SetActive(false);
                         myDestination.assignedTask = false;
+                        myAudio.clip = harvestSound;
+                        myAudio.Play();
                     }
                 }
                 break;
@@ -120,6 +127,8 @@ public class Drone : MonoBehaviour
                             myDestination.buildAnimator.SetActive(false);
                             myDestination.assignedTask = false;
                             myDestination.CreateBuilding();
+                            myAudio.clip = buildSound;
+                            myAudio.Play();
                         }
                     }
                 }
@@ -167,6 +176,7 @@ public class Drone : MonoBehaviour
 
     public void KillDrone()
     {
+        Instantiate(deathSound, transform.position, transform.rotation);
         Instantiate(deathParticle, transform.position, transform.rotation);
         AgentHandler.myDrones.Remove(this);
         Destroy(this.gameObject);

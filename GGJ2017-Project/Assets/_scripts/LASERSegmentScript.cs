@@ -34,11 +34,13 @@ public class LASERSegmentScript : MonoBehaviour {
     float deathTimer = 0.0f;
 
     bool appear = false;
-    
 
+    public AudioSource myAudio;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        myAudio = GetComponentInParent<AudioSource>();
         foreach (Transform child in transform)
         {
             child.GetComponent<MeshRenderer>().enabled = false;
@@ -231,6 +233,7 @@ public class LASERSegmentScript : MonoBehaviour {
                 Destroy(child.gameObject);
             }
             Destroy(gameObject);
+            myAudio.Play();
         }
         if (collider.tag == "Ground")
         {
