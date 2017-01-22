@@ -8,6 +8,8 @@ public class ScreenShakeScript : MonoBehaviour {
     public float shakeDuration = 0.3f;
     Camera camera;
     Vector3 initpos;
+    public GameObject PauseScreen;
+    public GameObject DefeatScreen;
     // Use this for initialization
     void Start () {
         camera = gameObject.GetComponent<Camera>();
@@ -16,6 +18,11 @@ public class ScreenShakeScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        if (Input.GetKey("escape"))
+        {
+            PauseScreen.SetActive(true);
+        }
         if (shake > 0)
         {
             camera.transform.localPosition = initpos + Random.insideUnitSphere * shakeAmount;

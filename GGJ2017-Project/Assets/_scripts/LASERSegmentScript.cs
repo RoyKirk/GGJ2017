@@ -35,6 +35,8 @@ public class LASERSegmentScript : MonoBehaviour {
 
     bool appear = false;
 
+    public GameObject DefeatScreen;
+
 
     // Use this for initialization
     void Start () {
@@ -170,8 +172,8 @@ public class LASERSegmentScript : MonoBehaviour {
         {
             GameObject.Find("Camera").GetComponent<ScreenShakeScript>().Shake();
             Destroy(collider.gameObject);
-            
-            StartCoroutine(RestartLevel());
+            GameObject.Find("Camera").GetComponent<ScreenShakeScript>().DefeatScreen.SetActive(true);
+            //StartCoroutine(RestartLevel());
 
             //Destroy(gameObject);
         }
