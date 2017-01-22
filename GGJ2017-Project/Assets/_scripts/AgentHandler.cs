@@ -9,6 +9,7 @@ public class AgentHandler : MonoBehaviour
     public static List<GroundBlocks> buildOrders = new List<GroundBlocks>();
 
     public GameObject dronePrefab;
+    public AudioSource myAudio;
 
     public static int resourcesInBase;
 
@@ -43,6 +44,7 @@ public class AgentHandler : MonoBehaviour
                     currentblock.buildAnimator.SetActive(true);
                 }
             }
+            myAudio.Play();
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -60,6 +62,7 @@ public class AgentHandler : MonoBehaviour
                     currentblock.gatherAnimator.SetActive(true);
                 }
             }
+            myAudio.Play();
         }
 
         if (Input.GetMouseButtonDown(2))
@@ -76,6 +79,7 @@ public class AgentHandler : MonoBehaviour
                     currentblock.cancelAnimator.SetActive(true);
                 }
             }
+            myAudio.Play();
         }
 
         SpawnDrones();
