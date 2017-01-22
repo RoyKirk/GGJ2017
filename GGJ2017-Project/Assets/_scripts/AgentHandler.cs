@@ -33,7 +33,7 @@ public class AgentHandler : MonoBehaviour
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 100f))
+            if (Physics.Raycast(ray, out hit, 100f) && hit.transform.gameObject.tag == "Ground")
             {
                 GroundBlocks currentblock = hit.transform.gameObject.GetComponent<GroundBlocks>();
                 if (currentblock.assignedTask == false && currentblock.canBuildOn == true)
