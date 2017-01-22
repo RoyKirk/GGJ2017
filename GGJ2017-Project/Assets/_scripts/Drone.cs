@@ -12,9 +12,9 @@ public class Drone : MonoBehaviour
 
     public GameObject footStepPrefab;
     public ParticleSystem deathParticle;
-
-    public Material defaultMat;
-    public Material resourceMat;
+    
+    public GameObject walkAnimation;
+    public GameObject resourceAnimation;
 
     public bool isCarryingResource;
 
@@ -41,16 +41,7 @@ public class Drone : MonoBehaviour
 
         UpdateState();
         SpawnFootstep();
-
-        if (isCarryingResource)
-        {
-            GetComponent<Renderer>().material = resourceMat;
-        }
-
-        else
-        {
-            GetComponent<Renderer>().material = defaultMat;
-        }
+        ChangeAnimation();
 	}
 
     public void UpdateState()
@@ -190,6 +181,21 @@ public class Drone : MonoBehaviour
         else
         {
             myState = DroneState.Idle;
+        }
+    }
+
+    void ChangeAnimation()
+    {
+        if (isCarryingResource)
+        {
+            resourceAnimation.SetActive(true);
+            walkAnimation.SetActive(false);
+        }
+
+        else
+        {
+            resourceAnimation.SetActive(false);
+            walkAnimation.SetActive(true);
         }
     }
 }

@@ -29,6 +29,7 @@ public class GroundBlocks : MonoBehaviour
     Material Mat;
 
     public Material DefaultMat;
+    public Material highlightedMat;
     public Material ScorchedMat;
     public Material HarvestedMat;
     public Material FlashMat;
@@ -57,18 +58,19 @@ public class GroundBlocks : MonoBehaviour
 	void Update ()
     {
         //Flash();
+        Highlight();
 
         if (currentResetTimer > 0)
         {
             currentResetTimer -= Time.deltaTime;
             //Flash(DefaultMat);
-            GetComponent<Renderer>().material = HarvestedMat;
+            //GetComponent<Renderer>().material = HarvestedMat;
             currentFlashDuration = durationOfFlash;
         }
         else if (Depleted)
         {
             Depleted = false;
-            GetComponent<Renderer>().material = DefaultMat;
+            //GetComponent<Renderer>().material = DefaultMat;
             flashAnimator.SetActive(true);
             //Mat = DefaultMat;
         }
@@ -123,6 +125,22 @@ public class GroundBlocks : MonoBehaviour
         }
     }
 
+    public void ResetOrder()
+    {
+        if (myAssignedDrone == null)
+        {
+            if (buildAnimator.activeInHierarchy)
+            {
+                AgentHandler.buildOrders.Add(this);
+            }
+
+            else if(gatherAnimator.activeInHierarchy)
+            {
+                AgentHandler.digOrders.Add(this);
+            }
+        }
+    }
+
     void Flash(Material resultMat)
     {
         if(currentFlashDuration > 0)
@@ -172,6 +190,41 @@ public class GroundBlocks : MonoBehaviour
         //{
         //    currentFlashDuration = durationOfFlash;
         //}
+    }
+
+    void Highlight()
+    {
+        if (Depleted)
+        {
+            GetComponent<Renderer>().material = HarvestedMat;
+
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                if (hit.transform.gameObject.GetComponent<GroundBlocks>() == this)
+                {
+                    GetComponent<Renderer>().material = ScorchedMat;
+                }
+            }
+        }
+
+        else
+        {
+            GetComponent<Renderer>().material = DefaultMat;
+
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                if (hit.transform.gameObject.GetComponent<GroundBlocks>() == this)
+                {
+                    GetComponent<Renderer>().material = highlightedMat;
+                }
+            }
+        }
     }
 }
 
