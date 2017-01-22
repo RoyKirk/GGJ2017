@@ -34,8 +34,7 @@ public class LASERSegmentScript : MonoBehaviour {
     float deathTimer = 0.0f;
 
     bool appear = false;
-
-    public GameObject DefeatScreen;
+    
 
 
     // Use this for initialization
@@ -130,11 +129,27 @@ public class LASERSegmentScript : MonoBehaviour {
                 {
                     CollisionChecks(hit.collider);
                 }
+                if (Physics.Raycast(transform.position + new Vector3(-0.5f,0,0), new Vector3(0, 0, 1), out hit, 1.0f))
+                {
+                    CollisionChecks(hit.collider);
+                }
+                if (Physics.Raycast(transform.position + new Vector3(0.5f, 0, 0), new Vector3(0, 0, 1), out hit, 1.0f))
+                {
+                    CollisionChecks(hit.collider);
+                }
                 transform.position += new Vector3(0, 0, 1) * speed * Time.deltaTime;
             }
             if (dir == Direction.SOUTH)
             {
                 if (Physics.Raycast(transform.position, new Vector3(0, 0, -1), out hit, 1.0f))
+                {
+                    CollisionChecks(hit.collider);
+                }
+                if (Physics.Raycast(transform.position + new Vector3(-0.5f, 0, 0), new Vector3(0, 0, 1), out hit, 1.0f))
+                {
+                    CollisionChecks(hit.collider);
+                }
+                if (Physics.Raycast(transform.position + new Vector3(0.5f, 0, 0), new Vector3(0, 0, 1), out hit, 1.0f))
                 {
                     CollisionChecks(hit.collider);
                 }
@@ -146,11 +161,27 @@ public class LASERSegmentScript : MonoBehaviour {
                 {
                     CollisionChecks(hit.collider);
                 }
+                if (Physics.Raycast(transform.position + new Vector3(0, 0, -0.5f), new Vector3(1, 0, 0), out hit, 1.0f))
+                {
+                    CollisionChecks(hit.collider);
+                }
+                if (Physics.Raycast(transform.position + new Vector3(0, 0, 0.5f), new Vector3(1, 0, 0), out hit, 1.0f))
+                {
+                    CollisionChecks(hit.collider);
+                }
                 transform.position += new Vector3(1, 0, 0) * speed * Time.deltaTime;
             }
             if (dir == Direction.WEST)
             {
                 if (Physics.Raycast(transform.position, new Vector3(-1, 0, 0), out hit, 1.0f))
+                {
+                    CollisionChecks(hit.collider);
+                }
+                if (Physics.Raycast(transform.position + new Vector3(0, 0, -0.5f), new Vector3(1, 0, 0), out hit, 1.0f))
+                {
+                    CollisionChecks(hit.collider);
+                }
+                if (Physics.Raycast(transform.position + new Vector3(0, 0, 0.5f), new Vector3(1, 0, 0), out hit, 1.0f))
                 {
                     CollisionChecks(hit.collider);
                 }
