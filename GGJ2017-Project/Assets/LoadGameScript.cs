@@ -10,4 +10,9 @@ public class LoadGameScript : MonoBehaviour {
     {
         SceneManager.LoadScene("royProto");
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
