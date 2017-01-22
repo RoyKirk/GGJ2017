@@ -4,8 +4,8 @@ using System.Collections;
 public class HiveMovement : MonoBehaviour
 {
     public float speed = 0.2f;
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
 	    
 	}
@@ -29,5 +29,6 @@ public class HiveMovement : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - speed);
         }
+        
     }
 }
