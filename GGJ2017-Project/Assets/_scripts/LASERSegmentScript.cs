@@ -77,6 +77,11 @@ public class LASERSegmentScript : MonoBehaviour {
             }
             RaycastHit hit;
 
+            if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 1.0f))
+            {
+                CollisionChecks(hit.collider);
+            }
+
             GetComponent<MeshRenderer>().enabled = true;
             if (dir == Direction.NORTH)
             {
