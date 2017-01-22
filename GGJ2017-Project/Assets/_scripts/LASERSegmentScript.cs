@@ -154,7 +154,7 @@ public class LASERSegmentScript : MonoBehaviour {
         }
         if (collider.tag == "Building")
         {
-            collider.gameObject.GetComponent<BuildingBlock>().TakeDamage();
+            collider.gameObject.GetComponent<BuildingBlock>().TakeDamage((int)strength);
 
             foreach (Transform child in transform)
             {
