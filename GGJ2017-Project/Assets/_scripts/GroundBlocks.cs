@@ -22,6 +22,9 @@ public class GroundBlocks : MonoBehaviour
     public GameObject gatherAnimator;
     public GameObject cancelAnimator;
     public GameObject flashAnimator;
+
+    public GameObject groundTexture;
+
     public Drone myAssignedDrone;
     public ParticleSystem harvestParticle;
     public ParticleSystem buildParticle;
@@ -196,7 +199,7 @@ public class GroundBlocks : MonoBehaviour
     {
         if (Depleted)
         {
-            GetComponent<Renderer>().material = HarvestedMat;
+            groundTexture.GetComponent<Renderer>().material = HarvestedMat;
 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -205,14 +208,14 @@ public class GroundBlocks : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<GroundBlocks>() == this)
                 {
-                    GetComponent<Renderer>().material = ScorchedMat;
+                    groundTexture.GetComponent<Renderer>().material = ScorchedMat;
                 }
             }
         }
 
         else
         {
-            GetComponent<Renderer>().material = DefaultMat;
+            groundTexture.GetComponent<Renderer>().material = DefaultMat;
 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -221,7 +224,7 @@ public class GroundBlocks : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<GroundBlocks>() == this)
                 {
-                    GetComponent<Renderer>().material = highlightedMat;
+                    groundTexture.GetComponent<Renderer>().material = highlightedMat;
                 }
             }
         }
