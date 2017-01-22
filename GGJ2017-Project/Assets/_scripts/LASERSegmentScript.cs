@@ -33,37 +33,48 @@ public class LASERSegmentScript : MonoBehaviour {
     float deathTime = 300.0f;
     float deathTimer = 0.0f;
 
+    bool appear = false;
+
 
     // Use this for initialization
     void Start () {
+        foreach (Transform child in transform)
+        {
+            child.GetComponent<MeshRenderer>().enabled = false;
+        }
 
-        GetComponent<MeshRenderer>().enabled = false;
+
+            GetComponent<MeshRenderer>().enabled = false;
 	}
 
 
     // Update is called once per frame
     void Update () {
+        foreach (Transform child in transform)
+        {
+            if (col == Colour.GREEN)
+            {
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+            }
+            if (col == Colour.RED)
+            {
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            }
+            if (col == Colour.BLUE)
+            {
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+            }
+            if (col == Colour.YELLOW)
+            {
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+            }
+            if (col == Colour.PURPLE)
+            {
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
+            }
+        }
 
-        if (col == Colour.GREEN)
-        {
-            gameObject.GetComponent<Renderer>().material.color = Color.green;
-        }
-        if (col == Colour.RED)
-        {
-            gameObject.GetComponent<Renderer>().material.color = Color.red;
-        }
-        if (col == Colour.BLUE)
-        {
-            gameObject.GetComponent<Renderer>().material.color = Color.blue;
-        }
-        if (col == Colour.YELLOW)
-        {
-            gameObject.GetComponent<Renderer>().material.color = Color.yellow;
-        }
-        if (col == Colour.PURPLE)
-        {
-            gameObject.GetComponent<Renderer>().material.color = Color.magenta;
-        }
+
 
 
 
@@ -81,8 +92,17 @@ public class LASERSegmentScript : MonoBehaviour {
             {
                 CollisionChecks(hit.collider);
             }
+            if (!appear)
+            {
+                foreach (Transform child in transform)
+                {
+                    child.GetComponent<MeshRenderer>().enabled = true;
+                }
+                GetComponent<MeshRenderer>().enabled = true;
+                appear = true;
+            }
+            
 
-            GetComponent<MeshRenderer>().enabled = true;
             if (dir == Direction.NORTH)
             {
                 if (Physics.Raycast(transform.position, new Vector3(0,0,1), out hit, 1.0f))
@@ -134,7 +154,12 @@ public class LASERSegmentScript : MonoBehaviour {
         }
         if (collider.tag == "Building")
         {
-            collider.gameObject.GetComponent<BuildingBlock>().TakeDamage();
+            collider.gameObject.GetComponent<BuildingBlock>().TakeDamage((int)strength);
+
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
             Destroy(gameObject);
         }
         if (collider.tag == "Ground")
@@ -143,6 +168,7 @@ public class LASERSegmentScript : MonoBehaviour {
         }
         if (collider.tag == "Hive")
         {
+            GameObject.Find("Camera").GetComponent<ScreenShakeScript>().Shake();
             Destroy(collider.gameObject);
             
             StartCoroutine(RestartLevel());
