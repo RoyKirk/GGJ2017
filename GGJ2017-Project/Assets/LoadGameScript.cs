@@ -15,4 +15,9 @@ public class LoadGameScript : MonoBehaviour {
     {
         Application.Quit();
     }
+
+    public void ContinueGame()
+    {
+        transform.parent.gameObject.SetActive(false);
+    }
 }
