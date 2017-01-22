@@ -180,7 +180,8 @@ public class LASERSegmentScript : MonoBehaviour {
     IEnumerator RestartLevel()
     {
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("royMenu");
     }
 
     void OnTriggerEnter(Collider other)
