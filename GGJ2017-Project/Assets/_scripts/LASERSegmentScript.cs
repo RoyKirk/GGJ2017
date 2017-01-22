@@ -143,6 +143,7 @@ public class LASERSegmentScript : MonoBehaviour {
         }
         if (collider.tag == "Hive")
         {
+            GameObject.Find("Camera").GetComponent<ScreenShakeScript>().Shake();
             Destroy(collider.gameObject);
             
             StartCoroutine(RestartLevel());
