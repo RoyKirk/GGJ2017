@@ -76,7 +76,26 @@ public class LASERSegmentScript : MonoBehaviour {
             }
         }
 
-
+        if (col == Colour.GREEN)
+        {
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+        }
+        if (col == Colour.RED)
+        {
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+        }
+        if (col == Colour.BLUE)
+        {
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+        }
+        if (col == Colour.YELLOW)
+        {
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+        }
+        if (col == Colour.PURPLE)
+        {
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
+        }
 
 
 
