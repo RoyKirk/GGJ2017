@@ -46,11 +46,12 @@ public class LaserSpawnScript : LASERSegmentScript {
 	void Start () {
 
         //script new lasers
-        spawns.Add(new LaserSpawn(W, yellow, 1, 1, 20));
-        spawns.Add(new LaserSpawn(E, red, 1, 2, 25));
-        spawns.Add(new LaserSpawn(S, blue, 1, 3, 20));
-        spawns.Add(new LaserSpawn(N, purple, 1, 1, 30));
-        spawns.Add(new LaserSpawn(E, green, 1, 2, 35));
+        spawns.Add(new LaserSpawn(W, yellow, 1, 1, 5f));
+        spawns.Add(new LaserSpawn(W, yellow, 1, 1, 6f));
+        spawns.Add(new LaserSpawn(W, red, 1, 1, 7f));
+        spawns.Add(new LaserSpawn(W, blue, 1, 1, 8f));
+        spawns.Add(new LaserSpawn(W, purple, 1, 2, 9f));
+        //spawns.Add(new LaserSpawn(E, green, 1, 1, 43.7f));
 
 
 

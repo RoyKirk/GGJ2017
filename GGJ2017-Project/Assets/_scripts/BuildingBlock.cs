@@ -23,6 +23,8 @@ public class BuildingBlock : MonoBehaviour
         --health;
         if (health <= 0)
         {
+            GameObject.Find("Camera").GetComponent<ScreenShakeScript>().Shake();
+
             myLocation.canBuildOn = true;
             Destroy(this.gameObject);
         }

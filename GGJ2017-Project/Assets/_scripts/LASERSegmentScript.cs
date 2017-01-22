@@ -30,7 +30,7 @@ public class LASERSegmentScript : MonoBehaviour {
     public float speed = 1.0f;
     public float delay = 1.0f;
     public float delayTimer = 0.0f;
-    float deathTime = 20.0f;
+    float deathTime = 300.0f;
     float deathTimer = 0.0f;
 
 
@@ -76,6 +76,11 @@ public class LASERSegmentScript : MonoBehaviour {
                 Destroy(gameObject.transform.parent.gameObject);
             }
             RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 1.0f))
+            {
+                CollisionChecks(hit.collider);
+            }
 
             GetComponent<MeshRenderer>().enabled = true;
             if (dir == Direction.NORTH)
@@ -138,6 +143,7 @@ public class LASERSegmentScript : MonoBehaviour {
         }
         if (collider.tag == "Hive")
         {
+            GameObject.Find("Camera").GetComponent<ScreenShakeScript>().Shake();
             Destroy(collider.gameObject);
             
             StartCoroutine(RestartLevel());
