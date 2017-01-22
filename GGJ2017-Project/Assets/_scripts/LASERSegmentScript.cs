@@ -112,6 +112,14 @@ public class LASERSegmentScript : MonoBehaviour {
             {
                 CollisionChecks(hit.collider);
             }
+            if (Physics.Raycast(transform.position + new Vector3(-0.5f, 0, 0), new Vector3(0, -1, 0), out hit, 1.0f))
+            {
+                CollisionChecks(hit.collider);
+            }
+            if (Physics.Raycast(transform.position + new Vector3(0.5f, 0, 0), new Vector3(0, -1, 0), out hit, 1.0f))
+            {
+                CollisionChecks(hit.collider);
+            }
             if (!appear)
             {
                 foreach (Transform child in transform)
