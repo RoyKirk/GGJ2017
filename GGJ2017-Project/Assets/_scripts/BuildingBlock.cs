@@ -18,9 +18,9 @@ public class BuildingBlock : MonoBehaviour
 
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        --health;
+        health -= damage;
         if (health <= 0)
         {
             GameObject.Find("Camera").GetComponent<ScreenShakeScript>().Shake();
