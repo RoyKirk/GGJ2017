@@ -130,17 +130,16 @@ public class GroundBlocks : MonoBehaviour
 
     public void ResetOrder()
     {
-        if (myAssignedDrone == null)
-        {
-            if (buildAnimator.activeInHierarchy)
-            {
-                AgentHandler.buildOrders.Add(this);
-            }
+        myAssignedDrone = null;
 
-            else if(gatherAnimator.activeInHierarchy)
-            {
-                AgentHandler.digOrders.Add(this);
-            }
+        if (buildAnimator.activeInHierarchy)
+        {
+            AgentHandler.buildOrders.Add(this);
+        }
+
+        else if (gatherAnimator.activeInHierarchy)
+        {
+            AgentHandler.digOrders.Add(this);
         }
     }
 
