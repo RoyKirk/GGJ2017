@@ -179,6 +179,10 @@ public class Drone : MonoBehaviour
         Instantiate(deathSound, transform.position, transform.rotation);
         Instantiate(deathParticle, transform.position, transform.rotation);
         AgentHandler.myDrones.Remove(this);
+        if (myDestination != null)
+        {
+            myDestination.ResetOrder();
+        }
         Destroy(this.gameObject);
     }
 
