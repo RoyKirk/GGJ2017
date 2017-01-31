@@ -17,12 +17,14 @@ public class PlayerController : MonoBehaviour {
     public float ROTATE_MAX_DELAY_TIMER = 1f;
     public float currentRotateDelay;
 
+    Collider collider;
+
     // Use this for initialization
     void Start ()
     {
         currentMoveDelay = 0;
         currentRotateDelay = 0;
-
+        collider = GetComponent<Collider>();
     }
 	
 	// Update is called once per frame
@@ -34,8 +36,10 @@ public class PlayerController : MonoBehaviour {
 
         if(currentMoveDelay >= MOVE_MAX_DELAY_TIMER)
         {
+            checkUnderneath();
             ThumbstickMove();
             DpadMove();
+            checkUnderneath();
         }
 
         if(currentRotateDelay >= ROTATE_MAX_DELAY_TIMER)
@@ -53,13 +57,19 @@ public class PlayerController : MonoBehaviour {
                 //move left or right
                 if (Controller.state[player].ThumbSticks.Left.X > thumbXDeadZone)
                 {
-                    gameObject.transform.position += Vector3.right * speed;// * Time.deltaTime;
-                    currentMoveDelay = 0;
+                    if(transform.position.x < 8.4f)
+                    {
+                        gameObject.transform.position += Vector3.right * speed;// * Time.deltaTime;
+                        currentMoveDelay = 0;
+                    }
                 }
                 else
                 {
-                    gameObject.transform.position += Vector3.left * speed;// * Time.deltaTime;
-                    currentMoveDelay = 0;
+                    if (transform.position.x > 0)
+                    {
+                        gameObject.transform.position += Vector3.left * speed;// * Time.deltaTime;
+                        currentMoveDelay = 0;
+                    }
                 }
             }
             else
@@ -67,13 +77,19 @@ public class PlayerController : MonoBehaviour {
                 //move up or down
                 if (Controller.state[player].ThumbSticks.Left.Y > thumbYDeadZone)
                 {
-                    gameObject.transform.position += Vector3.forward * speed;// * Time.deltaTime;
-                    currentMoveDelay = 0;
+                    if (transform.position.z < 8.4f)
+                    {
+                        gameObject.transform.position += Vector3.forward * speed;// * Time.deltaTime;
+                        currentMoveDelay = 0;
+                    }
                 }
                 else
                 {
-                    gameObject.transform.position += Vector3.back * speed;// * Time.deltaTime;
-                    currentMoveDelay = 0;
+                    if (transform.position.z > 0)
+                    {
+                        gameObject.transform.position += Vector3.back * speed;// * Time.deltaTime;
+                        currentMoveDelay = 0;
+                    }
                 }
             }
         }
@@ -104,7 +120,6 @@ public class PlayerController : MonoBehaviour {
         {
             Debug.Log("player wants to move down");
             gameObject.transform.position += Vector3.back * speed;// * Time.deltaTime;
-            currentMoveDelay = 0;
         }
     }
 
@@ -131,6 +146,19 @@ public class PlayerController : MonoBehaviour {
         {
             gameObject.transform.Rotate(0, 180, 0);
             currentRotateDelay = 0;
+        }
+    }
+
+    //check to see if there is a player where you are trying to move
+    void checkUnderneath()
+    {
+        Ray ray = new Ray(transform.position, -transform.up);
+        Debug.DrawRay(transform.position, -transform.up);
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit, 10))
+        {
+            transform.position = hit.collider.gameObject.transform.position;
+            transform.position += Vector3.up;
         }
     }
 }
