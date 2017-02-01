@@ -36,10 +36,10 @@ public class PlayerController : MonoBehaviour {
 
         if(currentMoveDelay >= MOVE_MAX_DELAY_TIMER)
         {
-            checkUnderneath();
+            //checkUnderneath();
             ThumbstickMove();
             DpadMove();
-            checkUnderneath();
+            //checkUnderneath();
         }
 
         if(currentRotateDelay >= ROTATE_MAX_DELAY_TIMER)
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     if(transform.position.x < 8.4f)
                     {
-                        gameObject.transform.position += Vector3.right * speed;// * Time.deltaTime;
+                        gameObject.transform.position += Vector3.right * speed * Time.deltaTime;// * Time.deltaTime;
                         currentMoveDelay = 0;
                     }
                 }
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     if (transform.position.x > 0)
                     {
-                        gameObject.transform.position += Vector3.left * speed;// * Time.deltaTime;
+                        gameObject.transform.position += Vector3.left * speed * Time.deltaTime;// * Time.deltaTime;
                         currentMoveDelay = 0;
                     }
                 }
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     if (transform.position.z < 8.4f)
                     {
-                        gameObject.transform.position += Vector3.forward * speed;// * Time.deltaTime;
+                        gameObject.transform.position += Vector3.forward * speed * Time.deltaTime;// * Time.deltaTime;
                         currentMoveDelay = 0;
                     }
                 }
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour {
                 {
                     if (transform.position.z > 0)
                     {
-                        gameObject.transform.position += Vector3.back * speed;// * Time.deltaTime;
+                        gameObject.transform.position += Vector3.back * speed * Time.deltaTime;// * Time.deltaTime;
                         currentMoveDelay = 0;
                     }
                 }
