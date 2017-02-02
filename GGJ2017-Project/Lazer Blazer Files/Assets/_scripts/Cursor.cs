@@ -64,5 +64,7 @@ public class Cursor : MonoBehaviour
 			}
 			m_handler.myAudio.Play();
 		}
+
+		Debug.Log (Input.GetAxis("TriggersR_1"));
 	}
 }
