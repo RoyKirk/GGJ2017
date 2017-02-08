@@ -31,7 +31,7 @@ public class Cursor : MonoBehaviour
 
 	void CheckInput()
 	{
-		if (Input.GetAxis("TriggersL_1") > 0.5f)
+		if (Input.GetAxis("TriggersL_1") > 0.5f) //harvest block
 		{
 			RaycastHit hit;
 
@@ -43,12 +43,13 @@ public class Cursor : MonoBehaviour
 					AgentHandler.digOrders.Add(currentblock);
 					currentblock.assignedTask = true;
 					currentblock.gatherAnimator.SetActive(true);
+					m_handler.mostRecentOrder = currentblock;
 				}
 			}
 			m_handler.myAudio.Play();
 		}
 
-		else if (Input.GetAxis("TriggersR_1") > 0.5f)
+		else if (Input.GetAxis("TriggersR_1") > 0.5f) //build on block
 		{
 			RaycastHit hit;
 
@@ -60,11 +61,76 @@ public class Cursor : MonoBehaviour
 					AgentHandler.buildOrders.Add(currentblock);
 					currentblock.assignedTask = true;
 					currentblock.buildAnimator.SetActive(true);
+					m_handler.mostRecentOrder = currentblock;
 				}
 			}
 			m_handler.myAudio.Play();
 		}
 
-		Debug.Log (Input.GetAxis("TriggersR_1"));
+
+		else if (Input.GetButtonDown("B_1") && m_handler.mostRecentOrder != null) //cancel most recent order
+		{
+			if (m_handler.mostRecentOrder.isBuildOrder == true) 
+			{
+				AgentHandler.buildOrders.Remove (m_handler.mostRecentOrder);	
+			} 
+
+			if (m_handler.mostRecentOrder.isDigOrder == true)
+			{
+				AgentHandler.digOrders.Remove (m_handler.mostRecentOrder);	
+			}
+
+			m_handler.mostRecentOrder.CancelOrder ();
+			m_handler.mostRecentOrder.cancelAnimator.SetActive (true);
+		}
+
+		else if (Input.GetButtonDown("X_1") && (AgentHandler.buildOrders.Count > 0 || AgentHandler.digOrders.Count > 0)) //cancel furthest order
+		{
+			GroundBlocks orderToCancel = null;
+			bool isDigOrder = false;
+			if (AgentHandler.buildOrders.Count > 0) 
+			{
+				orderToCancel = AgentHandler.buildOrders[0];
+			}
+
+			else if (AgentHandler.digOrders.Count > 0) 
+			{
+				orderToCancel = AgentHandler.digOrders[0];
+			}
+
+			//at this point orderToCancel should be asssigned
+			if (orderToCancel != null) 
+			{
+				foreach(GroundBlocks currentBlock in AgentHandler.buildOrders)
+				{
+					if (Vector3.Distance (m_handler.transform.position, currentBlock.transform.position) > Vector3.Distance (m_handler.transform.position, orderToCancel.transform.position)) 
+					{
+						orderToCancel = currentBlock;
+						isDigOrder = false;
+					}
+				}
+
+				foreach(GroundBlocks currentBlock in AgentHandler.digOrders)
+				{
+					if (Vector3.Distance (m_handler.transform.position, currentBlock.transform.position) > Vector3.Distance (m_handler.transform.position, orderToCancel.transform.position)) 
+					{
+						orderToCancel = currentBlock;
+						isDigOrder = true;
+					}
+				}
+
+				orderToCancel.CancelOrder ();
+				orderToCancel.cancelAnimator.SetActive (true);
+				if (isDigOrder == true) 
+				{
+					AgentHandler.digOrders.Remove (orderToCancel);	
+				} 
+
+				else 
+				{
+					AgentHandler.buildOrders.Remove (orderToCancel);	
+				}
+			}
+		}
 	}
 }

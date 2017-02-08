@@ -10,7 +10,9 @@ public class GroundBlocks : MonoBehaviour
     public bool scorched;//set this when a lazer scorches it
     public bool canBuildOn;//check this to see if you can build on the block
 
-    public bool assignedTask;//change this when you set a task to a block, then check when setting a task.
+	public bool assignedTask;//change this when you set a task to a block, then check when setting a task.
+	public bool isBuildOrder; //indicates that this block is part of the buildOrders list
+	public bool isDigOrder; //indicates that this block is part of the digOrders list
 
     public float MaxScorchedTimer = 10;
     public float MaxHarvestTimer = 5;

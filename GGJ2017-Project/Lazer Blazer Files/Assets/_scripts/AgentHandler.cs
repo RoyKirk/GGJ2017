@@ -7,6 +7,7 @@ public class AgentHandler : MonoBehaviour
     public static List<Drone> myDrones = new List<Drone>();
     public static List<GroundBlocks> digOrders = new List<GroundBlocks>();
     public static List<GroundBlocks> buildOrders = new List<GroundBlocks>();
+	public GroundBlocks mostRecentOrder;
 
     public GameObject dronePrefab;
     public AudioSource myAudio;
@@ -40,6 +41,7 @@ public class AgentHandler : MonoBehaviour
                 if (currentblock.assignedTask == false && currentblock.canBuildOn == true)
                 {
                     buildOrders.Add(currentblock);
+					currentblock.isBuildOrder = true;
                     currentblock.assignedTask = true;
                     currentblock.buildAnimator.SetActive(true);
                 }
@@ -58,6 +60,7 @@ public class AgentHandler : MonoBehaviour
                 if (currentblock.assignedTask == false && currentblock.Depleted == false)
                 {
                     digOrders.Add(currentblock);
+					currentblock.isDigOrder = true;
                     currentblock.assignedTask = true;
                     currentblock.gatherAnimator.SetActive(true);
                 }
@@ -92,6 +95,7 @@ public class AgentHandler : MonoBehaviour
                 currentDrone.myState = Drone.DroneState.Dig;
                 currentDrone.SetDestination(digOrders[0]);
                 digOrders[0].myAssignedDrone = currentDrone;
+				digOrders[0].isDigOrder = false;
                 digOrders.RemoveAt(0);
                 continue;
             }
@@ -102,7 +106,8 @@ public class AgentHandler : MonoBehaviour
                 {
                     currentDrone.myState = Drone.DroneState.Build;
                     currentDrone.SetDestination(buildOrders[0]);
-                    buildOrders[0].myAssignedDrone = currentDrone;
+					buildOrders[0].myAssignedDrone = currentDrone;
+					buildOrders[0].isBuildOrder = false;
                     buildOrders.RemoveAt(0);
                     continue;
                 }
@@ -111,7 +116,8 @@ public class AgentHandler : MonoBehaviour
                 {
                     currentDrone.myState = Drone.DroneState.Build;
                     currentDrone.SetDestination(buildOrders[0]);
-                    buildOrders[0].myAssignedDrone = currentDrone;
+					buildOrders[0].myAssignedDrone = currentDrone;
+					buildOrders[0].isBuildOrder = false;
                     buildOrders.RemoveAt(0);
                     continue;
                 }
