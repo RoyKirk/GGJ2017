@@ -57,45 +57,45 @@ public class LASERSegmentScript : MonoBehaviour {
         {
             if (col == Colour.GREEN)
             {
-                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_GlowColor", Color.green);
             }
             if (col == Colour.RED)
             {
-                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_GlowColor", Color.red);
             }
             if (col == Colour.BLUE)
             {
-                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_GlowColor", Color.blue);
             }
             if (col == Colour.YELLOW)
             {
-                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_GlowColor", Color.yellow);
             }
             if (col == Colour.PURPLE)
             {
-                child.gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
+                child.gameObject.GetComponent<Renderer>().material.SetColor("_GlowColor", Color.magenta);
             }
         }
 
         if (col == Colour.GREEN)
         {
-            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+            gameObject.GetComponent<Renderer>().material.SetColor("_GlowColor", Color.green);
         }
         if (col == Colour.RED)
         {
-            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+            gameObject.GetComponent<Renderer>().material.SetColor("_GlowColor", Color.red);
         }
         if (col == Colour.BLUE)
         {
-            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+            gameObject.GetComponent<Renderer>().material.SetColor("_GlowColor", Color.blue);
         }
         if (col == Colour.YELLOW)
         {
-            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.yellow);
+            gameObject.GetComponent<Renderer>().material.SetColor("_GlowColor", Color.yellow);
         }
         if (col == Colour.PURPLE)
         {
-            gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.magenta);
+            gameObject.GetComponent<Renderer>().material.SetColor("_GlowColor", Color.magenta);
         }
 
 
