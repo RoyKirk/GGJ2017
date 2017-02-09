@@ -47,6 +47,8 @@ public class LaserSpawnScript : LASERSegmentScript {
 
         //script new lasers
 
+        //direction,colour,stregnth,speed,delay
+
 
         spawns.Add(new LaserSpawn(E, purple, 1, 1, 15f));
         spawns.Add(new LaserSpawn(S, blue, 1, 1, 30f));
@@ -96,6 +98,7 @@ public class LaserSpawnScript : LASERSegmentScript {
         spawns.Add(new LaserSpawn(N, green, 1, 1, 296f));
 
         spawns.Add(new LaserSpawn(E, purple, 1, 1, 305f));
+        //level end
         //level end
 
 
