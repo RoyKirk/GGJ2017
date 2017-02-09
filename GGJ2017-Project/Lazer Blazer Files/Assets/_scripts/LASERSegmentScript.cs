@@ -11,7 +11,6 @@ public class LASERSegmentScript : MonoBehaviour {
         EAST,
         WEST,
         SOUTH,
-
     }
 
     public enum Colour
@@ -114,19 +113,19 @@ public class LASERSegmentScript : MonoBehaviour {
             {
                 CollisionChecks(hit.collider);
             }
-            else if (Physics.Raycast(transform.position + new Vector3(-0.5f, 0, 0), new Vector3(0, -1, 0), out hit, 1.0f))
+            else if (Physics.Raycast(transform.position + new Vector3(-0.45f, 0, 0), new Vector3(0, -1, 0), out hit, 1.0f))
             {
                 CollisionChecks(hit.collider);
             }
-            else if (Physics.Raycast(transform.position + new Vector3(0.5f, 0, 0), new Vector3(0, -1, 0), out hit, 1.0f))
+            else if (Physics.Raycast(transform.position + new Vector3(0.45f, 0, 0), new Vector3(0, -1, 0), out hit, 1.0f))
             {
                 CollisionChecks(hit.collider);
             }
-            else if (Physics.Raycast(transform.position + new Vector3(0, 0, -0.5f), new Vector3(0, -1, 0), out hit, 1.0f))
+            else if (Physics.Raycast(transform.position + new Vector3(0, 0, -0.45f), new Vector3(0, -1, 0), out hit, 1.0f))
             {
                 CollisionChecks(hit.collider);
             }
-            else if (Physics.Raycast(transform.position + new Vector3(0, 0, 0.5f), new Vector3(0, -1, 0), out hit, 1.0f))
+            else if (Physics.Raycast(transform.position + new Vector3(0, 0, 0.45f), new Vector3(0, -1, 0), out hit, 1.0f))
             {
                 CollisionChecks(hit.collider);
             }
@@ -149,11 +148,11 @@ public class LASERSegmentScript : MonoBehaviour {
                 {
                     CollisionChecks(hit.collider);
                 }
-                else if (Physics.Raycast(transform.position + new Vector3(-0.5f,0,0), new Vector3(0, 0, 1), out hit, 1.0f))
+                else if (Physics.Raycast(transform.position + new Vector3(-0.45f,0,0), new Vector3(0, 0, 1), out hit, 1.0f))
                 {
                     CollisionChecks(hit.collider);
                 }
-                else if (Physics.Raycast(transform.position + new Vector3(0.5f, 0, 0), new Vector3(0, 0, 1), out hit, 1.0f))
+                else if (Physics.Raycast(transform.position + new Vector3(0.45f, 0, 0), new Vector3(0, 0, 1), out hit, 1.0f))
                 {
                     CollisionChecks(hit.collider);
                 }
@@ -165,11 +164,11 @@ public class LASERSegmentScript : MonoBehaviour {
                 {
                     CollisionChecks(hit.collider);
                 }
-                else if (Physics.Raycast(transform.position + new Vector3(-0.5f, 0, 0), new Vector3(0, 0, -1), out hit, 1.0f))
+                else if (Physics.Raycast(transform.position + new Vector3(-0.45f, 0, 0), new Vector3(0, 0, -1), out hit, 1.0f))
                 {
                     CollisionChecks(hit.collider);
                 }
-                else if (Physics.Raycast(transform.position + new Vector3(0.5f, 0, 0), new Vector3(0, 0, -1), out hit, 1.0f))
+                else if (Physics.Raycast(transform.position + new Vector3(0.45f, 0, 0), new Vector3(0, 0, -1), out hit, 1.0f))
                 {
                     CollisionChecks(hit.collider);
                 }
@@ -181,11 +180,11 @@ public class LASERSegmentScript : MonoBehaviour {
                 {
                     CollisionChecks(hit.collider);
                 }
-                else if (Physics.Raycast(transform.position + new Vector3(0, 0, -0.5f), new Vector3(1, 0, 0), out hit, 1.0f))
+                else if (Physics.Raycast(transform.position + new Vector3(0, 0, -0.45f), new Vector3(1, 0, 0), out hit, 1.0f))
                 {
                     CollisionChecks(hit.collider);
                 }
-                else if (Physics.Raycast(transform.position + new Vector3(0, 0, 0.5f), new Vector3(1, 0, 0), out hit, 1.0f))
+                else if (Physics.Raycast(transform.position + new Vector3(0, 0, 0.45f), new Vector3(1, 0, 0), out hit, 1.0f))
                 {
                     CollisionChecks(hit.collider);
                 }
@@ -197,11 +196,11 @@ public class LASERSegmentScript : MonoBehaviour {
                 {
                     CollisionChecks(hit.collider);
                 }
-                else if (Physics.Raycast(transform.position + new Vector3(0, 0, -0.5f), new Vector3(-1, 0, 0), out hit, 1.0f))
+                else if (Physics.Raycast(transform.position + new Vector3(0, 0, -0.45f), new Vector3(-1, 0, 0), out hit, 1.0f))
                 {
                     CollisionChecks(hit.collider);
                 }
-                else if (Physics.Raycast(transform.position + new Vector3(0, 0, 0.5f), new Vector3(-1, 0, 0), out hit, 1.0f))
+                else if (Physics.Raycast(transform.position + new Vector3(0, 0, 0.45f), new Vector3(-1, 0, 0), out hit, 1.0f))
                 {
                     CollisionChecks(hit.collider);
                 }
@@ -226,7 +225,7 @@ public class LASERSegmentScript : MonoBehaviour {
         }
         if (collider.tag == "Building")
         {
-            collider.gameObject.GetComponent<BuildingBlock>().TakeDamage((int)strength);
+            collider.gameObject.GetComponent<BuildingBlock>().TakeDamage((float)strength);
 
             foreach (Transform child in transform)
             {
