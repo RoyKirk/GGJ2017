@@ -87,6 +87,7 @@ public class GroundBlocks : MonoBehaviour
                 currentResetTimer = MaxScorchedTimer;
                 Mat = ScorchedMat;
             }
+			CancelOrder ();
             scorched = false;
             Depleted = true;
         }

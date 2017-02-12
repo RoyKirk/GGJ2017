@@ -33,7 +33,8 @@ public class PlayerPulseScript : MonoBehaviour
         {
             if (Controller.state[player].Buttons.A == XInputDotNetPure.ButtonState.Pressed)
             {
-                collider.enabled = true;
+                //collider.enabled = true;
+
                 //still need to reset this so it turns off, maybe use a bool to control duration, eg. see thrust
             }
         }

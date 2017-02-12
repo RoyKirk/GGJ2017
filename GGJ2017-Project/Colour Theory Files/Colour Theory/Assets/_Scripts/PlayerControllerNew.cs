@@ -30,7 +30,10 @@ public class PlayerControllerNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(transform.position.y < -1)
+        {
+            //Application.LoadLevel(0);
+        }
 
         if(Thrusting)
         {
@@ -59,40 +62,69 @@ public class PlayerControllerNew : MonoBehaviour
         //move left or right
         if (Controller.state[player].ThumbSticks.Left.X > thumbXDeadZone)
         {
-            Rb.AddForce(Vector3.right * speed * Time.deltaTime);
+            if (Rb.velocity.x > VelocityClamp)
+            {
+                //Rb.velocity = new Vector3(VelocityClamp, Rb.velocity.y, Rb.velocity.z);
+            }
+            else
+            {
+                Rb.AddForce(Vector3.right * speed * Time.deltaTime);
+            }
         }
         else if(Controller.state[player].ThumbSticks.Left.X < -thumbXDeadZone)
         {
-            Rb.AddForce(Vector3.left * speed * Time.deltaTime);
+            if (Rb.velocity.x < -VelocityClamp)
+            {
+                //Rb.velocity = new Vector3(-VelocityClamp, Rb.velocity.y, Rb.velocity.z);
+            }
+            else
+            {
+                Rb.AddForce(Vector3.left * speed * Time.deltaTime);
+            }
+            
         }
         
         //move up or down
         if (Controller.state[player].ThumbSticks.Left.Y > thumbYDeadZone)
         {
-            Rb.AddForce(Vector3.forward * speed * Time.deltaTime);
+            if (Rb.velocity.z > VelocityClamp)
+            {
+                //Rb.velocity = new Vector3(Rb.velocity.x, Rb.velocity.y, VelocityClamp);
+            }
+            else
+            {
+                Rb.AddForce(Vector3.forward * speed * Time.deltaTime);
+            }
         }
         else if(Controller.state[player].ThumbSticks.Left.Y < -thumbYDeadZone)
         {
-            Rb.AddForce(Vector3.back * speed * Time.deltaTime);
+            if (Rb.velocity.z < -VelocityClamp)
+            {
+                //Rb.velocity = new Vector3(Rb.velocity.x, Rb.velocity.y, -VelocityClamp);
+            }
+            else
+            {
+                Rb.AddForce(Vector3.back * speed * Time.deltaTime);
+            }
         }
         
         //clamp velocity
-        if(Rb.velocity.x > VelocityClamp)
-        {
-            Rb.velocity = new Vector3(VelocityClamp, Rb.velocity.y,Rb.velocity.z);
-        }
-        else if (Rb.velocity.x < -VelocityClamp)
-        {
-            Rb.velocity = new Vector3(-VelocityClamp, Rb.velocity.y, Rb.velocity.z);
-        }
-        if (Rb.velocity.z > VelocityClamp)
-        {
-            Rb.velocity = new Vector3(Rb.velocity.x, Rb.velocity.y, VelocityClamp);
-        }
-        else if (Rb.velocity.z < -VelocityClamp)
-        {
-            Rb.velocity = new Vector3(Rb.velocity.x, Rb.velocity.y, -VelocityClamp);
-        }
+        //if(Rb.velocity.x > VelocityClamp)
+        //{
+        //    Rb.velocity = new Vector3(VelocityClamp, Rb.velocity.y,Rb.velocity.z);
+        //}
+        //else if (Rb.velocity.x < -VelocityClamp)
+        //{
+        //    Rb.velocity = new Vector3(-VelocityClamp, Rb.velocity.y, Rb.velocity.z);
+        //}
+        //if (Rb.velocity.z > VelocityClamp)
+        //{
+        //    Rb.velocity = new Vector3(Rb.velocity.x, Rb.velocity.y, VelocityClamp);
+        //}
+        //else if (Rb.velocity.z < -VelocityClamp)
+        //{
+        //    Rb.velocity = new Vector3(Rb.velocity.x, Rb.velocity.y, -VelocityClamp);
+        //}
     }
 
     public float VelocityClamp = 5;

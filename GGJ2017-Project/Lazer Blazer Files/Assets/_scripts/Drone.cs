@@ -4,10 +4,11 @@ using System.Collections;
 
 public class Drone : MonoBehaviour
 {
-    public enum DroneState {Idle, Gather, Dig, Build}
+    public enum DroneState {Idle, Gather, Dig, Build, Demolish}
     public DroneState myState;
-    NavMeshAgent myAgent;
-    GroundBlocks myDestination;
+	NavMeshAgent myAgent;
+	GroundBlocks myDestination;
+	BuildingBlock buildingToDemolish;
     public Vector3 myBaseLocation;
 
     public GameObject footStepPrefab;
@@ -151,15 +152,36 @@ public class Drone : MonoBehaviour
                 }
                 break;
 
+		case DroneState.Demolish:
+				if (Vector3.Distance (transform.position, buildingToDemolish.transform.position) > 1.0f) 
+				{
+					if (myAgent.destination != buildingToDemolish.transform.position)
+					{
+						myAgent.SetDestination(buildingToDemolish.transform.position);
+					}
+				} 
+
+				else 
+				{
+					buildingToDemolish.TakeDamage (5);
+					KillDrone ();
+				}
+				break;
+
             default:
                 break;
         }
     }
 
-    public void SetDestination(GroundBlocks destination)
-    {
-        myDestination = destination;
-    }
+	public void SetDestination(GroundBlocks destination)
+	{
+		myDestination = destination;
+	}
+
+	public void SetDestination(BuildingBlock destination)
+	{
+		buildingToDemolish = destination;
+	}
 
     public void SpawnFootstep()
     {

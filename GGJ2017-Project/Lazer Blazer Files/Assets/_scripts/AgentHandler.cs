@@ -5,8 +5,9 @@ using System.Collections.Generic;
 public class AgentHandler : MonoBehaviour
 {
     public static List<Drone> myDrones = new List<Drone>();
-    public static List<GroundBlocks> digOrders = new List<GroundBlocks>();
-    public static List<GroundBlocks> buildOrders = new List<GroundBlocks>();
+	public static List<GroundBlocks> digOrders = new List<GroundBlocks>();
+	public static List<GroundBlocks> buildOrders = new List<GroundBlocks>();
+	public static List<BuildingBlock> demolitionOrders = new List<BuildingBlock>();
 	public GroundBlocks mostRecentOrder;
 
     public GameObject dronePrefab;
@@ -122,6 +123,14 @@ public class AgentHandler : MonoBehaviour
                     continue;
                 }
             }
+
+			if (demolitionOrders.Count > 0 && currentDrone.myState == Drone.DroneState.Idle) 
+			{
+				currentDrone.myState = Drone.DroneState.Demolish;
+				currentDrone.SetDestination(demolitionOrders[0]);
+				demolitionOrders.RemoveAt(0);
+				continue;
+			}
         }
     }
 

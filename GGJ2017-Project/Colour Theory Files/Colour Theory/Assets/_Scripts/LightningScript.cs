@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+//using System;
 
 public class LightningScript : MonoBehaviour
 {
@@ -14,11 +15,18 @@ public class LightningScript : MonoBehaviour
 
     public float[] PlayerDistances;
 
+    public int[] sortedElement;
+
     // Use this for initialization
     void Start()
     {
         Players = GameObject.FindGameObjectsWithTag("Player");
         PlayerDistances = new float[Players.Length];
+        sortedElement = new int[Players.Length];
+        sortedElement[0] = 100;
+        sortedElement[1] = 100;
+        comparison = new float[4];
+        elementPos = new int[2];
     }
 
     // Update is called once per frame
@@ -74,7 +82,39 @@ public class LightningScript : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 1000))
             {
                 PlayerDistances[x] = hit.distance;
+                //Array.Sort(PlayerDistances);
                 x++;
+            }
+        }
+    }
+
+    float[] comparison;
+    int[] elementPos;
+
+    void SortPlayers()
+    {
+        comparison[0] = PlayerDistances[0];
+        comparison[1] = 100;
+
+        for(int i = 1; i < PlayerDistances.Length; i++)
+        {
+            if(comparison[0] > PlayerDistances[i])
+            {
+                comparison[0] = PlayerDistances[i];
+                elementPos[0] = i;
+            }
+        }
+
+        for(int x = 0; x < PlayerDistances.Length; x++)
+        {
+            if(comparison[1] > PlayerDistances[x] && PlayerDistances[x] != comparison[0])
+            {
+                comparison[1] = PlayerDistances[x];
+                elementPos[1] = x;
+            }
+            else
+            {
+                //comparison[1]
             }
         }
     }
