@@ -67,6 +67,48 @@ public class Cursor : MonoBehaviour
 			m_handler.myAudio.Play();
 		}
 
+		if (Input.GetButton("LS_1")) //destroy wall
+		{
+			RaycastHit hit;
+
+			if (Physics.Raycast(transform.position, Vector3.down, out hit) && hit.transform.gameObject.tag == "Building")
+			{
+				BuildingBlock currentblock = hit.transform.gameObject.GetComponent<BuildingBlock>();
+				if (currentblock.toBeDemolished == false) 
+				{
+					currentblock.toBeDemolished = true;
+					AgentHandler.demolitionOrders.Add(currentblock);
+				}
+			}
+			m_handler.myAudio.Play();
+		}
+
+		if (Input.GetButton("RS_1")) //cancel order
+		{
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+			if (Physics.Raycast(transform.position, Vector3.down, out hit) && hit.transform.gameObject.tag == "Ground")
+			{
+				GroundBlocks currentblock = hit.transform.gameObject.GetComponent<GroundBlocks>();
+				if (currentblock.assignedTask == true) 
+				{
+					currentblock.CancelOrder ();
+					currentblock.cancelAnimator.SetActive (true);
+				} 
+
+				else if (currentblock.isDigOrder) 
+				{
+					AgentHandler.digOrders.Remove (currentblock);
+				} 
+
+				else 
+				{
+					AgentHandler.buildOrders.Remove (currentblock);
+				}
+			}
+			m_handler.myAudio.Play();
+		}
 
 		else if (Input.GetButtonDown("B_1") && m_handler.mostRecentOrder != null) //cancel most recent order
 		{

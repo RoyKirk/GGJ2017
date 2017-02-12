@@ -9,15 +9,25 @@ public class BuildingBlock : MonoBehaviour
 
     public GameObject explosion;
 
+	NavMeshObstacle m_obstacle;
+	public float colliderDelay;
+	float colliderTimer;
+
+	public bool toBeDemolished = false;
+
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+		m_obstacle = GetComponent<NavMeshObstacle> ();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-
+		if (m_obstacle.enabled == false) 
+		{
+			ActivateObstacle ();
+		}
     }
 
     public void TakeDamage(float damage)
@@ -32,6 +42,19 @@ public class BuildingBlock : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+	void ActivateObstacle()
+	{
+		if (colliderTimer < colliderDelay) 
+		{
+			colliderTimer += Time.deltaTime;
+		} 
+
+		else 
+		{
+			m_obstacle.enabled = true;
+		}
+	}
 }
 
 //when destroyed change bool of HasBuilding of block below this building.
