@@ -45,6 +45,7 @@ public class PlayerControllerNew : MonoBehaviour
                 speed = speed / ThrustSpeed;
                 VelocityClamp = VelocityClamp / ThrustSpeed;
                 Thrusting = false;
+                ThrustAnim.SetActive(false);
                 currentThrustDuration = 0;
             }
             ThumbstickMove();
@@ -162,6 +163,7 @@ public class PlayerControllerNew : MonoBehaviour
     public float ThrustExplosiveForce;
     public float PlayerThrustRadius;
 
+    public GameObject ThrustAnim;
 
     void OnCollisionEnter(Collision c)
     {
@@ -177,6 +179,7 @@ public class PlayerControllerNew : MonoBehaviour
                 Thrusting = false;
                 Rb.velocity = Vector3.zero;
                 currentThrustDuration = 0;
+                ThrustAnim.SetActive(false);
             }
         }
     }
@@ -217,6 +220,7 @@ public class PlayerControllerNew : MonoBehaviour
                 //Rb.velocity = Vector3.zero;
                 Thrusting = true;
                 currentThrustDelay = 0;
+                ThrustAnim.SetActive(true);
             }
         }
     }
