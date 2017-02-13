@@ -37,15 +37,19 @@ public class PlayerControllerNew : MonoBehaviour
 
         if(Thrusting)
         {
-            PlayerThrustCollision();
+            //PlayerThrustCollision();
             currentThrustDuration += Time.deltaTime;
             if(currentThrustDuration >= ThrustDuration)
             {
                 //Rb.velocity = Vector3.zero;
+                speed = speed / ThrustSpeed;
+                VelocityClamp = VelocityClamp / ThrustSpeed;
                 Thrusting = false;
                 currentThrustDuration = 0;
             }
-            Rb.AddRelativeForce(Vector3.forward * ThrustForce * Time.deltaTime);
+            ThumbstickMove();
+            Rotate();
+            //Rb.AddRelativeForce(Vector3.forward * ThrustForce * Time.deltaTime);
         }
         else
         {
@@ -154,7 +158,29 @@ public class PlayerControllerNew : MonoBehaviour
     float currentFireBallShootDelay = 0;
 
     GameObject projectile;
-    
+
+    public float ThrustExplosiveForce;
+    public float PlayerThrustRadius;
+
+
+    void OnCollisionEnter(Collision c)
+    {
+        if(Thrusting)
+        {
+            if (c.gameObject.tag == "Player")
+            {
+                Debug.Log("hit PLayer");
+                c.rigidbody.AddExplosionForce(ThrustExplosiveForce, transform.position, PlayerThrustRadius);
+                c.rigidbody.AddForce(Rb.velocity);
+                speed = speed / ThrustSpeed;
+                VelocityClamp = VelocityClamp / ThrustSpeed;
+                Thrusting = false;
+                Rb.velocity = Vector3.zero;
+                currentThrustDuration = 0;
+            }
+        }
+    }
+
 
     void ShootFireBall()
     {
@@ -174,7 +200,7 @@ public class PlayerControllerNew : MonoBehaviour
 
     public float ThrustDelay = 5f;
     float currentThrustDelay = 0;
-    public float ThrustForce = 100;
+    public float ThrustSpeed = 2;
     public bool Thrusting = false;
 
     void Thrust()
@@ -184,9 +210,11 @@ public class PlayerControllerNew : MonoBehaviour
         {
             if (Controller.state[player].Triggers.Left >= thumbXDeadZone)
             {
+                speed = speed * ThrustSpeed;
+                VelocityClamp = VelocityClamp * ThrustSpeed;
                 //Rb.AddRelativeForce(Vector3.forward * ThrustForce * Time.deltaTime);
                 //transform.Translate(transform.forward * ThrustForce * Time.deltaTime);
-                Rb.velocity = Vector3.zero;
+                //Rb.velocity = Vector3.zero;
                 Thrusting = true;
                 currentThrustDelay = 0;
             }
@@ -196,44 +224,46 @@ public class PlayerControllerNew : MonoBehaviour
     public float ThrustCollisionForce;
     public float ThrustRadius;
 
-    void PlayerThrustCollision()
-    {
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+    //void PlayerThrustCollision()
+    //{
 
-        RaycastHit hit;
 
-        Ray rayLeft = new Ray(new Vector3(transform.position.x + 0.5f, transform.position.y,transform.position.z), fwd);
-
-        if (Physics.Raycast(rayLeft, out hit, 0.7f))
-        {
-            if (hit.transform.tag == "Player")
-            {
-                //reset thrust
-                Thrusting = false;
-                currentThrustDuration = 0;
-                Rb.velocity = Vector3.zero;
-                //apply force to other player
-                //hit.rigidbody.AddExplosionForce(ThrustCollisionForce, transform.position, ThrustRadius);
-                hit.transform.GetComponent<Rigidbody>().AddExplosionForce(ThrustCollisionForce, transform.position, ThrustRadius);
-            }
-        }
-
-        Ray rayRight = new Ray(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), fwd);
-
-        if (Physics.Raycast(rayRight, out hit, 0.7f))
-        {
-            if (hit.transform.tag == "Player")
-            {
-                //reset thrust
-                Thrusting = false;
-                currentThrustDuration = 0;
-                Rb.velocity = Vector3.zero;
-                //apply force to other player
-                //hit.rigidbody.AddExplosionForce(ThrustCollisionForce, transform.position, ThrustRadius);
-                hit.transform.GetComponent<Rigidbody>().AddExplosionForce(ThrustCollisionForce, transform.position, ThrustRadius);
-            }
-        }
-    }
+        //Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        //
+        //RaycastHit hit;
+        //
+        //Ray rayLeft = new Ray(new Vector3(transform.position.x + 0.5f, transform.position.y,transform.position.z), fwd);
+        //
+        //if (Physics.Raycast(rayLeft, out hit, 0.7f))
+        //{
+        //    if (hit.transform.tag == "Player")
+        //    {
+        //        //reset thrust
+        //        Thrusting = false;
+        //        currentThrustDuration = 0;
+        //        Rb.velocity = Vector3.zero;
+        //        //apply force to other player
+        //        //hit.rigidbody.AddExplosionForce(ThrustCollisionForce, transform.position, ThrustRadius);
+        //        hit.transform.GetComponent<Rigidbody>().AddExplosionForce(ThrustCollisionForce, transform.position, ThrustRadius);
+        //    }
+        //}
+        //
+        //Ray rayRight = new Ray(new Vector3(transform.position.x - 0.5f, transform.position.y, transform.position.z), fwd);
+        //
+        //if (Physics.Raycast(rayRight, out hit, 0.7f))
+        //{
+        //    if (hit.transform.tag == "Player")
+        //    {
+        //        //reset thrust
+        //        Thrusting = false;
+        //        currentThrustDuration = 0;
+        //        Rb.velocity = Vector3.zero;
+        //        //apply force to other player
+        //        //hit.rigidbody.AddExplosionForce(ThrustCollisionForce, transform.position, ThrustRadius);
+        //        hit.transform.GetComponent<Rigidbody>().AddExplosionForce(ThrustCollisionForce, transform.position, ThrustRadius);
+        //    }
+        //}
+    //}
 }
 
 
