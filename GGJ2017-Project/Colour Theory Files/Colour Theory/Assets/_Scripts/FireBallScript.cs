@@ -7,17 +7,20 @@ public class FireBallScript : MonoBehaviour
 
     public float DestructionTimer = 3f;
     float currentDestructionTimer = 0;
+
+    Rigidbody Rb;
 	// Use this for initialization
 	void Start ()
     {
-	    
+        Rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
         //move forward
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        Rb.AddRelativeForce(Vector3.forward * speed * Time.deltaTime);
 
         //destroy after time
         currentDestructionTimer += Time.deltaTime;
@@ -49,12 +52,16 @@ public class FireBallScript : MonoBehaviour
     public float ExplosiveForce;
     public float Radius;
 
-    void OnCollisionStay(Collision c)
+    void OnCollisionEnter(Collision c)
     {
         if(c.gameObject.tag == "Player")
         {
-            Debug.Log("hit player");
+            //Debug.Log("hit player");
             c.rigidbody.AddExplosionForce(ExplosiveForce, transform.position, Radius);
+            //c.rigidbody.AddExplosionForce(ExplosiveForce, Rb.velocity, Radius);
+            c.rigidbody.AddForce(Rb.velocity);// + transform.rotation.eulerAngles);
+            //c.rigidbody.AddForce(c.impulse);
+            //c.rigidbody.velocity += Rb.velocity;
             Destroy(gameObject);
         }
     }

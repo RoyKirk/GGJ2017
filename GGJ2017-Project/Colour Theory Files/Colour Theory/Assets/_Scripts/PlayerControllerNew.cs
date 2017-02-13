@@ -153,6 +153,9 @@ public class PlayerControllerNew : MonoBehaviour
     public float FireBallShootDelay = 1;
     float currentFireBallShootDelay = 0;
 
+    GameObject projectile;
+    
+
     void ShootFireBall()
     {
         currentFireBallShootDelay += Time.deltaTime;
@@ -160,7 +163,8 @@ public class PlayerControllerNew : MonoBehaviour
         {
             if (Controller.state[player].Triggers.Right >= thumbXDeadZone)
             {
-                Instantiate(FireBallPrefab, shootPos.transform.position, transform.rotation);
+                projectile = Instantiate(FireBallPrefab, shootPos.transform.position, transform.rotation) as GameObject;
+                Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
                 currentFireBallShootDelay = 0;
             }
         }
