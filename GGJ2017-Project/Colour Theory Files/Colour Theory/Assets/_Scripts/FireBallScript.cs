@@ -36,17 +36,17 @@ public class FireBallScript : MonoBehaviour
     {
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
 
-        RaycastHit hit;
-
-        Ray ray = new Ray(transform.position, fwd);
-
-        if (Physics.Raycast(ray,out hit, 0.5f))
-        {
-            if(hit.transform.tag == "Projectile")
-            {
-                Destroy(gameObject);
-            }
-        }
+        //RaycastHit hit;
+        //
+        //Ray ray = new Ray(transform.position, fwd);
+        //
+        //if (Physics.Raycast(ray,out hit, 0.5f))
+        //{
+        //    if(hit.transform.tag == "Projectile")
+        //    {
+        //        Destroy(gameObject);
+        //    }
+        //}
     }
 
     public float ExplosiveForce;
@@ -62,6 +62,10 @@ public class FireBallScript : MonoBehaviour
             c.rigidbody.AddForce(Rb.velocity);// + transform.rotation.eulerAngles);
             //c.rigidbody.AddForce(c.impulse);
             //c.rigidbody.velocity += Rb.velocity;
+            Destroy(gameObject);
+        }
+        else if (c.gameObject.tag == "Projectile")
+        {
             Destroy(gameObject);
         }
     }
