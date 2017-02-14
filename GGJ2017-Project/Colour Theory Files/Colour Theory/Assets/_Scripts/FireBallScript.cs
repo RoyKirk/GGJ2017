@@ -31,11 +31,11 @@ public class FireBallScript : MonoBehaviour
 
         
 	}
-
+    private Vector3 oldVelocity;
     void FixedUpdate()
     {
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
+        oldVelocity = Rb.velocity;
         //RaycastHit hit;
         //
         //Ray ray = new Ray(transform.position, fwd);
@@ -67,6 +67,21 @@ public class FireBallScript : MonoBehaviour
         else if (c.gameObject.tag == "Projectile")
         {
             Destroy(gameObject);
+        }
+        else if (c.gameObject.tag == "Reflect")
+        {
+
+            // get the point of contact
+            ContactPoint contact = c.contacts[0];
+
+            // reflect our old velocity off the contact point's normal vector
+            Vector3 reflectedVelocity = Vector3.Reflect(oldVelocity, contact.normal);
+
+            // assign the reflected velocity back to the rigidbody
+            Rb.velocity = reflectedVelocity;
+            // rotate the object by the same ammount we changed its velocity
+            Quaternion rotation = Quaternion.FromToRotation(oldVelocity, reflectedVelocity);
+            transform.rotation = rotation * transform.rotation;
         }
     }
 }
