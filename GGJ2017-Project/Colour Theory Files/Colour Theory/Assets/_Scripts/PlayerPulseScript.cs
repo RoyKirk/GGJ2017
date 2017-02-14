@@ -16,6 +16,8 @@ public class PlayerPulseScript : MonoBehaviour
 
     public float pulseDelay = 1;
     public float currentPulseDelay = 0;
+    public float pulseDuration = 0.25f;
+
 
     public GameObject pulseAnim;
 
@@ -42,7 +44,7 @@ public class PlayerPulseScript : MonoBehaviour
             }
         }
 
-        if(currentPulseDelay >= 0.25f)
+        if(currentPulseDelay >= pulseDuration)
         {
             pulseAnim.SetActive(false);
             collider.enabled = false;

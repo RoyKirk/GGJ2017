@@ -38,40 +38,44 @@ public class LightningScript : MonoBehaviour
     public float ColliderDelay = 0.5f;
     float currentColliderDelay = 0;
 
+    public float maxForward;
+
     // Update is called once per frame
     void Update()
     {
-        if(colliderDeactive == true)
-        {
-            currentColliderDelay += Time.deltaTime;
-        }
-        if(currentColliderDelay >= ColliderDelay)
-        {
-            colliderDeactive = false;
-            thisCollider.enabled = true;
-            currentColliderDelay = 0;
-        }
+        //if(colliderDeactive == true)
+        //{
+        //    currentColliderDelay += Time.deltaTime;
+        //}
+        //if(currentColliderDelay >= ColliderDelay)
+        //{
+        //    colliderDeactive = false;
+        //    thisCollider.enabled = true;
+        //    currentColliderDelay = 0;
+        //}
+
+        Rb.velocity = Vector3.ClampMagnitude(Rb.velocity, maxForward);
         //move forward
         //transform.Translate(Vector3.forward * speed * Time.deltaTime);
         //Rb.transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        
+
     }
 
     void FixedUpdate()
     {
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-        RaycastHit hit;
-
-        Ray ray = new Ray(transform.position, fwd);
-
-        if (Physics.Raycast(ray, out hit, 0.5f))
-        {
-            if (hit.transform.tag == "Projectile")
-            {
-                Destroy(gameObject);
-            }
-        }
+        //Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        //
+        //RaycastHit hit;
+        //
+        //Ray ray = new Ray(transform.position, fwd);
+        //
+        //if (Physics.Raycast(ray, out hit, 0.5f))
+        //{
+        //    if (hit.transform.tag == "Projectile")
+        //    {
+        //        Destroy(gameObject);
+        //    }
+        //}
 
         RayCastAllPlayers();
     }
@@ -85,8 +89,8 @@ public class LightningScript : MonoBehaviour
     {
         if (c.gameObject.tag == "Player")
         {
-            thisCollider.enabled = false;
-            colliderDeactive = true;
+            //thisCollider.enabled = false;
+            //colliderDeactive = true;
             c.rigidbody.AddExplosionForce(ExplosiveForce, transform.position, Radius);
             c.rigidbody.AddForce(Rb.velocity);
             transform.LookAt(Players[Random.Range(0, Players.Length)].transform);
