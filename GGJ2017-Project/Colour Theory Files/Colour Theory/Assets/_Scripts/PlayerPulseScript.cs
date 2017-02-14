@@ -15,7 +15,9 @@ public class PlayerPulseScript : MonoBehaviour
     public SphereCollider collider;
 
     public float pulseDelay = 1;
-    float currentPulseDelay = 0;
+    public float currentPulseDelay = 0;
+
+    public GameObject pulseAnim;
 
 	// Use this for initialization
 	void Start ()
@@ -33,21 +35,28 @@ public class PlayerPulseScript : MonoBehaviour
         {
             if (Controller.state[player].Buttons.A == XInputDotNetPure.ButtonState.Pressed)
             {
-                //collider.enabled = true;
-
+                collider.enabled = true;
+                currentPulseDelay = 0;
+                pulseAnim.SetActive(true);
                 //still need to reset this so it turns off, maybe use a bool to control duration, eg. see thrust
             }
+        }
+
+        if(currentPulseDelay >= 0.25f)
+        {
+            pulseAnim.SetActive(false);
+            collider.enabled = false;
         }
 	}
 
     public float PulseForce = 300;
     public float PulseRadius = 5;
 
-    void OnCollisionEnter(Collision c)
+    void OnTriggerEnter(Collider c)
     {
         if(c.transform.tag == "Player")
         {
-            c.rigidbody.AddExplosionForce(PulseForce, transform.position, PulseRadius);
+            c.GetComponent<Rigidbody>().AddExplosionForce(PulseForce, transform.position, PulseRadius);
         }
     }
 }

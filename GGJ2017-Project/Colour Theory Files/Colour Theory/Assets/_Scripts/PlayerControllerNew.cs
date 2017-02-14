@@ -45,6 +45,7 @@ public class PlayerControllerNew : MonoBehaviour
                 speed = speed / ThrustSpeed;
                 VelocityClamp = VelocityClamp / ThrustSpeed;
                 Thrusting = false;
+                ThrustAnim.SetActive(false);
                 currentThrustDuration = 0;
             }
             ThumbstickMove();
@@ -162,6 +163,13 @@ public class PlayerControllerNew : MonoBehaviour
     public float ThrustExplosiveForce;
     public float PlayerThrustRadius;
 
+    public GameObject ThrustAnim;
+
+    private Vector3 oldVelocity;
+    void FixedUpdate()
+    {
+        oldVelocity = Rb.velocity;
+    }
 
     void OnCollisionEnter(Collision c)
     {
@@ -177,6 +185,22 @@ public class PlayerControllerNew : MonoBehaviour
                 Thrusting = false;
                 Rb.velocity = Vector3.zero;
                 currentThrustDuration = 0;
+                ThrustAnim.SetActive(false);
+            }
+            else if (c.gameObject.tag == "Reflect")
+            {
+
+                // get the point of contact
+                ContactPoint contact = c.contacts[0];
+
+                // reflect our old velocity off the contact point's normal vector
+                Vector3 reflectedVelocity = Vector3.Reflect(oldVelocity, contact.normal);
+
+                // assign the reflected velocity back to the rigidbody
+                Rb.velocity = reflectedVelocity;
+                // rotate the object by the same ammount we changed its velocity
+                Quaternion rotation = Quaternion.FromToRotation(oldVelocity, reflectedVelocity);
+                transform.rotation = rotation * transform.rotation;
             }
         }
     }
@@ -217,6 +241,7 @@ public class PlayerControllerNew : MonoBehaviour
                 //Rb.velocity = Vector3.zero;
                 Thrusting = true;
                 currentThrustDelay = 0;
+                ThrustAnim.SetActive(true);
             }
         }
     }
