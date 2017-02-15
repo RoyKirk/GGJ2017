@@ -30,7 +30,7 @@ public class ReflectScript : MonoBehaviour
         currentReflectDelay += Time.deltaTime;
         if (currentReflectDelay >= ReflectDelay)
         {
-            if (Controller.state[player].Buttons.A == XInputDotNetPure.ButtonState.Pressed)
+            if (Controller.state[player].Buttons.X == XInputDotNetPure.ButtonState.Pressed)
             {
                 collider.enabled = true;
                 currentReflectDelay = 0;

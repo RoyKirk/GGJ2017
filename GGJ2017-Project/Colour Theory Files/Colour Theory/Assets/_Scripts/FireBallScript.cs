@@ -8,6 +8,8 @@ public class FireBallScript : MonoBehaviour
     public float DestructionTimer = 3f;
     float currentDestructionTimer = 0;
 
+    public Collider playerCollider;
+
     Rigidbody Rb;
 	// Use this for initialization
 	void Start ()
@@ -27,6 +29,10 @@ public class FireBallScript : MonoBehaviour
         if(currentDestructionTimer >= DestructionTimer)
         {
             Destroy(gameObject);
+        }
+        else if(currentDestructionTimer >= 0.75f)
+        {
+            Physics.IgnoreCollision(GetComponent<Collider>(), playerCollider, false);
         }
 
         

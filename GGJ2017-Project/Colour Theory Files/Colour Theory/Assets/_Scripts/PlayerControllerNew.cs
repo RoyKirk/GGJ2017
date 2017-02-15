@@ -218,6 +218,7 @@ public class PlayerControllerNew : MonoBehaviour
             {
                 projectile = Instantiate(FireBallPrefab, shootPos.transform.position, transform.rotation) as GameObject;
                 Physics.IgnoreCollision(projectile.GetComponent<Collider>(), GetComponent<Collider>());
+                projectile.GetComponent<FireBallScript>().playerCollider = GetComponent<Collider>();
                 currentFireBallShootDelay = 0;
             }
         }
@@ -232,7 +233,8 @@ public class PlayerControllerNew : MonoBehaviour
         currentThrustDelay += Time.deltaTime;
         if(currentThrustDelay >= ThrustDelay)
         {
-            if (Controller.state[player].Triggers.Left >= thumbXDeadZone)
+            //if (Controller.state[player].Triggers.Left >= thumbXDeadZone)
+            if(Controller.state[player].Buttons.B == XInputDotNetPure.ButtonState.Pressed)
             {
                 speed = speed * ThrustSpeed;
                 VelocityClamp = VelocityClamp * ThrustSpeed;
