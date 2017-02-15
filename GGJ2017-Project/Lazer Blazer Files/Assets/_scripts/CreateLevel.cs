@@ -3,7 +3,8 @@ using System.Collections;
 
 public class CreateLevel : MonoBehaviour
 {
-    
+	public GameObject[,] groundTiles;
+
     public int levelWidth = 20;
     public int levelHeight = 20;
 
@@ -15,11 +16,13 @@ public class CreateLevel : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+		groundTiles = new GameObject[levelWidth, levelHeight];
+
         for (int x = widthCounter; x < levelWidth; x++)
         {
             for (int z = 0; z < levelHeight; z++)
             {
-                Instantiate(ground, new Vector3(widthCounter, 0, heightCounter), Quaternion.identity);
+				groundTiles[x,z] = Instantiate(ground, new Vector3(widthCounter, 0, heightCounter), Quaternion.identity) as GameObject;
                 heightCounter++;
             }
             heightCounter = 0;
