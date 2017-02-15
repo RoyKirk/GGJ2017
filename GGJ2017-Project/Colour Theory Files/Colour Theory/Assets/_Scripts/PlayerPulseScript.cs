@@ -56,7 +56,7 @@ public class PlayerPulseScript : MonoBehaviour
 
     void OnTriggerEnter(Collider c)
     {
-        if(c.transform.tag == "Player")
+        if(c.transform.tag == "Player" || c.gameObject.tag == "Object")
         {
             c.GetComponent<Rigidbody>().AddExplosionForce(PulseForce, transform.position, PulseRadius);
         }

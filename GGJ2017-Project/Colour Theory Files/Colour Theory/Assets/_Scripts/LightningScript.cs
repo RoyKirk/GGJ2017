@@ -87,7 +87,7 @@ public class LightningScript : MonoBehaviour
 
     void OnCollisionStay(Collision c)
     {
-        if (c.gameObject.tag == "Player")
+        if (c.gameObject.tag == "Player" || c.gameObject.tag == "Object")
         {
             //thisCollider.enabled = false;
             //colliderDeactive = true;

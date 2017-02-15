@@ -65,7 +65,7 @@ public class PlayerControllerNew : MonoBehaviour
     {
         if(transform.position.y < -1)
         {
-            //Application.LoadLevel(0);
+            Destroy(gameObject);
         }
 
         if(Thrusting)
@@ -178,7 +178,7 @@ public class PlayerControllerNew : MonoBehaviour
     {
         if(Thrusting)
         {
-            if (c.gameObject.tag == "Player")
+            if (c.gameObject.tag == "Player" || c.gameObject.tag == "Object")
             {
                 Debug.Log("hit PLayer");
                 c.rigidbody.AddExplosionForce(ThrustExplosiveForce, transform.position, PlayerThrustRadius);

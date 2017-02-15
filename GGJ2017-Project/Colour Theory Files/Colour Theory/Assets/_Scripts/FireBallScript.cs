@@ -11,6 +11,8 @@ public class FireBallScript : MonoBehaviour
     public Collider playerCollider;
 
     Rigidbody Rb;
+
+
 	// Use this for initialization
 	void Start ()
     {
@@ -60,7 +62,7 @@ public class FireBallScript : MonoBehaviour
 
     void OnCollisionEnter(Collision c)
     {
-        if(c.gameObject.tag == "Player")
+        if(c.gameObject.tag == "Player" || c.gameObject.tag == "Object")
         {
             //Debug.Log("hit player");
             c.rigidbody.AddExplosionForce(ExplosiveForce, transform.position, Radius);
