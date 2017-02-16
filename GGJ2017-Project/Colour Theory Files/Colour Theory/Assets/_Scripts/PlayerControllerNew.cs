@@ -205,14 +205,17 @@ public class PlayerControllerNew : MonoBehaviour
                 {
                     c.gameObject.GetComponent<PlayerControllerNew>().Vibration();
                 }
-                c.rigidbody.AddExplosionForce(ThrustExplosiveForce, transform.position, PlayerThrustRadius);
-                c.rigidbody.AddForce(Rb.velocity);
-                speed = speed / ThrustSpeed;
-                VelocityClamp = VelocityClamp / ThrustSpeed;
-                Thrusting = false;
-                Rb.velocity = Vector3.zero;
-                currentThrustDuration = 0;
-                ThrustAnim.SetActive(false);
+                if (c.rigidbody != null)
+                {
+                    c.rigidbody.AddExplosionForce(ThrustExplosiveForce, transform.position, PlayerThrustRadius);
+                    c.rigidbody.AddForce(Rb.velocity);
+                    speed = speed / ThrustSpeed;
+                    VelocityClamp = VelocityClamp / ThrustSpeed;
+                    Thrusting = false;
+                    Rb.velocity = Vector3.zero;
+                    currentThrustDuration = 0;
+                    ThrustAnim.SetActive(false);
+                }
             }
             else if (c.gameObject.tag == "Reflect")
             {

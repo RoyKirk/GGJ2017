@@ -69,12 +69,16 @@ public class FireBallScript : MonoBehaviour
             {
                 c.gameObject.GetComponent<PlayerControllerNew>().Vibration();
             }
-            //Debug.Log("hit player");
-            c.rigidbody.AddExplosionForce(ExplosiveForce, transform.position, Radius);
-            //c.rigidbody.AddExplosionForce(ExplosiveForce, Rb.velocity, Radius);
-            c.rigidbody.AddForce(Rb.velocity);// + transform.rotation.eulerAngles);
-            //c.rigidbody.AddForce(c.impulse);
-            //c.rigidbody.velocity += Rb.velocity;
+            if(c.rigidbody != null)
+            {
+                //Debug.Log("hit player");
+                c.rigidbody.AddExplosionForce(ExplosiveForce, transform.position, Radius);
+                //c.rigidbody.AddExplosionForce(ExplosiveForce, Rb.velocity, Radius);
+                c.rigidbody.AddForce(Rb.velocity);// + transform.rotation.eulerAngles);
+                                                  //c.rigidbody.AddForce(c.impulse);
+                                                  //c.rigidbody.velocity += Rb.velocity;
+                
+            }
             Instantiate(particleExplosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }
