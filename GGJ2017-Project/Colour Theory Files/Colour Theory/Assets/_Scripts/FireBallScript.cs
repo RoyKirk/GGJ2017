@@ -12,6 +12,7 @@ public class FireBallScript : MonoBehaviour
 
     Rigidbody Rb;
 
+    public GameObject particleExplosion;
 
 	// Use this for initialization
 	void Start ()
@@ -64,21 +65,27 @@ public class FireBallScript : MonoBehaviour
     {
         if(c.gameObject.tag == "Player" || c.gameObject.tag == "Object")
         {
+            if (c.gameObject.GetComponent<PlayerControllerNew>() != null)
+            {
+                c.gameObject.GetComponent<PlayerControllerNew>().Vibration();
+            }
             //Debug.Log("hit player");
             c.rigidbody.AddExplosionForce(ExplosiveForce, transform.position, Radius);
             //c.rigidbody.AddExplosionForce(ExplosiveForce, Rb.velocity, Radius);
             c.rigidbody.AddForce(Rb.velocity);// + transform.rotation.eulerAngles);
             //c.rigidbody.AddForce(c.impulse);
             //c.rigidbody.velocity += Rb.velocity;
+            Instantiate(particleExplosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }
         else if (c.gameObject.tag == "Projectile")
         {
+            Instantiate(particleExplosion, transform.position, transform.rotation);
             Destroy(gameObject);
         }
         else if (c.gameObject.tag == "Reflect")
         {
-
+            Instantiate(particleExplosion, transform.position, transform.rotation);
             // get the point of contact
             ContactPoint contact = c.contacts[0];
 

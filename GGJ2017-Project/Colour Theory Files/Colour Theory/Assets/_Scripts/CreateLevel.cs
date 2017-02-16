@@ -11,7 +11,7 @@ public class CreateLevel : MonoBehaviour
     {
         foreach (GameObject spawn in SpawnPos)
         {
-            Instantiate(Objects[Random.Range(0, 3)], spawn.transform.position, Quaternion.identity);
+            Instantiate(Objects[Random.Range(0, Objects.Length)], spawn.transform.position, Quaternion.identity);
         }
     }
 }
