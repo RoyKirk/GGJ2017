@@ -90,6 +90,8 @@ public class GroundBlocks : MonoBehaviour
 			CancelOrder ();
             scorched = false;
             Depleted = true;
+            //shader dissolve slider hook
+            //Mat.SetFloat("_DissolveAmount", Mat.GetFloat("_DissolveAmount") + 0.1f * Time.deltaTime);
         }
 
         if(harvested)

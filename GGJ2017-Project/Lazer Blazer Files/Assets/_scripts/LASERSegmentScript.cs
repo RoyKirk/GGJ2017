@@ -219,10 +219,10 @@ public class LASERSegmentScript : MonoBehaviour {
             //Destroy(collider.gameObject);
             //Destroy(gameObject);
         }
-        if (collider.tag == "Drone")
-        {
-            collider.gameObject.GetComponent<Drone>().KillDrone();
-        }
+       // if (collider.tag == "Drone")
+       // {
+       //     collider.gameObject.GetComponent<Drone>().KillDrone();
+      //  }
         if (collider.tag == "Building")
         {
             collider.gameObject.GetComponent<BuildingBlock>().TakeDamage((float)strength);

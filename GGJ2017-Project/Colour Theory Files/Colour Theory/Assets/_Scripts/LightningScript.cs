@@ -17,9 +17,12 @@ public class LightningScript : MonoBehaviour
 
     public int[] sortedElement;
 
+    Rigidbody Rb;
+
     // Use this for initialization
     void Start()
     {
+        Rb = GetComponent<Rigidbody>();
         Players = GameObject.FindGameObjectsWithTag("Player");
         PlayerDistances = new float[Players.Length];
         sortedElement = new int[Players.Length];
@@ -27,31 +30,52 @@ public class LightningScript : MonoBehaviour
         sortedElement[1] = 100;
         comparison = new float[4];
         elementPos = new int[2];
+        Rb.AddRelativeForce(Vector3.forward * speed * Time.deltaTime);
+        thisCollider = GetComponent<Collider>();
     }
+
+    bool colliderDeactive = false;
+    public float ColliderDelay = 0.5f;
+    float currentColliderDelay = 0;
+
+    public float maxForward;
 
     // Update is called once per frame
     void Update()
     {
+        //if(colliderDeactive == true)
+        //{
+        //    currentColliderDelay += Time.deltaTime;
+        //}
+        //if(currentColliderDelay >= ColliderDelay)
+        //{
+        //    colliderDeactive = false;
+        //    thisCollider.enabled = true;
+        //    currentColliderDelay = 0;
+        //}
+
+        Rb.velocity = Vector3.ClampMagnitude(Rb.velocity, maxForward);
         //move forward
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        
+        //transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        //Rb.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
     }
 
     void FixedUpdate()
     {
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-        RaycastHit hit;
-
-        Ray ray = new Ray(transform.position, fwd);
-
-        if (Physics.Raycast(ray, out hit, 0.5f))
-        {
-            if (hit.transform.tag == "Projectile")
-            {
-                Destroy(gameObject);
-            }
-        }
+        //Vector3 fwd = transform.TransformDirection(Vector3.forward);
+        //
+        //RaycastHit hit;
+        //
+        //Ray ray = new Ray(transform.position, fwd);
+        //
+        //if (Physics.Raycast(ray, out hit, 0.5f))
+        //{
+        //    if (hit.transform.tag == "Projectile")
+        //    {
+        //        Destroy(gameObject);
+        //    }
+        //}
 
         RayCastAllPlayers();
     }
@@ -59,13 +83,23 @@ public class LightningScript : MonoBehaviour
     public float ExplosiveForce;
     public float Radius;
 
+    Collider thisCollider;
+
     void OnCollisionStay(Collision c)
     {
-        if (c.gameObject.tag == "Player")
+        if (c.gameObject.tag == "Player" || c.gameObject.tag == "Object")
         {
-            Debug.Log("hit player");
+            //thisCollider.enabled = false;
+            //colliderDeactive = true;
             c.rigidbody.AddExplosionForce(ExplosiveForce, transform.position, Radius);
+            c.rigidbody.AddForce(Rb.velocity);
             transform.LookAt(Players[Random.Range(0, Players.Length)].transform);
+            Rb.velocity = Vector3.zero;
+            Rb.AddRelativeForce(Vector3.forward * speed * Time.deltaTime);
+        }
+        else if (c.gameObject.tag == "Projectile")
+        {
+            Destroy(gameObject);
         }
     }
     
