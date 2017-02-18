@@ -3,15 +3,15 @@
 // Shader created with Shader Forge v1.30 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.30;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:False,hqlp:False,rprd:False,enco:False,rmgx:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:2,rntp:3,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False;n:type:ShaderForge.SFN_Final,id:4013,x:33454,y:32710,varname:node_4013,prsc:2|diff-4786-RGB,spec-7058-OUT,normal-5101-RGB,emission-1498-RGB,clip-1638-OUT;n:type:ShaderForge.SFN_Tex2dAsset,id:2966,x:32444,y:33107,ptovrint:False,ptlb:Burn Texture,ptin:_BurnTexture,varname:node_2966,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:271f5ee3273dd7f4fae6e204d4f8c4bf,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:1498,x:32833,y:32996,varname:node_1498,prsc:2,tex:271f5ee3273dd7f4fae6e204d4f8c4bf,ntxv:0,isnm:False|UVIN-7469-OUT,TEX-2966-TEX;n:type:ShaderForge.SFN_Append,id:7469,x:32603,y:32879,varname:node_7469,prsc:2|A-2236-OUT,B-2064-OUT;n:type:ShaderForge.SFN_Vector1,id:2064,x:32432,y:32913,varname:node_2064,prsc:2,v1:0;n:type:ShaderForge.SFN_Tex2d,id:3863,x:31478,y:33072,ptovrint:False,ptlb:Noise,ptin:_Noise,varname:node_3863,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:28c7aad1372ff114b90d330f8a2dd938,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Slider,id:8204,x:30996,y:32879,ptovrint:False,ptlb:Dissolve Amount,ptin:_DissolveAmount,varname:node_8204,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:1,max:1;n:type:ShaderForge.SFN_Add,id:1638,x:31668,y:32879,varname:node_1638,prsc:2|A-9398-OUT,B-9179-OUT;n:type:ShaderForge.SFN_RemapRange,id:9398,x:31478,y:32879,varname:node_9398,prsc:2,frmn:0,frmx:1,tomn:-0.8,tomx:0.8|IN-5996-OUT;n:type:ShaderForge.SFN_OneMinus,id:5996,x:31320,y:32879,varname:node_5996,prsc:2|IN-8204-OUT;n:type:ShaderForge.SFN_RemapRange,id:7214,x:31842,y:32879,varname:node_7214,prsc:2,frmn:0,frmx:1,tomn:-4,tomx:4|IN-1638-OUT;n:type:ShaderForge.SFN_Clamp01,id:536,x:32098,y:32879,varname:node_536,prsc:2|IN-7214-OUT;n:type:ShaderForge.SFN_OneMinus,id:2236,x:32270,y:32879,varname:node_2236,prsc:2|IN-536-OUT;n:type:ShaderForge.SFN_Tex2d,id:4786,x:32833,y:32653,ptovrint:False,ptlb:Diffuse,ptin:_Diffuse,varname:node_4786,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:b66bceaf0cc0ace4e9bdc92f14bba709,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:5101,x:32833,y:32831,ptovrint:False,ptlb:Normal,ptin:_Normal,varname:node_5101,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:bbab0a6f7bae9cf42bf057d8ee2755f6,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Vector1,id:7058,x:32991,y:32750,varname:node_7058,prsc:2,v1:0;n:type:ShaderForge.SFN_Noise,id:7893,x:31187,y:33253,varname:node_7893,prsc:2|XY-5585-UVOUT;n:type:ShaderForge.SFN_TexCoord,id:5585,x:30970,y:33253,varname:node_5585,prsc:2,uv:0;n:type:ShaderForge.SFN_Add,id:9179,x:31645,y:33133,varname:node_9179,prsc:2|A-3863-RGB,B-9705-OUT;n:type:ShaderForge.SFN_Multiply,id:9705,x:31408,y:33295,varname:node_9705,prsc:2|A-7893-OUT,B-1150-OUT;n:type:ShaderForge.SFN_Vector1,id:1150,x:31244,y:33420,varname:node_1150,prsc:2,v1:0.3;proporder:2966-3863-8204-4786-5101;pass:END;sub:END;*/
+/*SF_DATA;ver:1.30;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:False,hqlp:False,rprd:False,enco:False,rmgx:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:2,rntp:3,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False;n:type:ShaderForge.SFN_Final,id:4013,x:33454,y:32710,varname:node_4013,prsc:2|diff-4786-RGB,spec-7058-OUT,normal-5101-RGB,emission-1498-RGB,clip-1638-OUT;n:type:ShaderForge.SFN_Tex2dAsset,id:2966,x:32444,y:33107,ptovrint:False,ptlb:Burn Texture,ptin:_BurnTexture,varname:node_2966,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:271f5ee3273dd7f4fae6e204d4f8c4bf,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:1498,x:32833,y:32996,varname:node_1498,prsc:2,tex:271f5ee3273dd7f4fae6e204d4f8c4bf,ntxv:0,isnm:False|UVIN-7469-OUT,TEX-2966-TEX;n:type:ShaderForge.SFN_Append,id:7469,x:32603,y:32879,varname:node_7469,prsc:2|A-2236-OUT,B-2064-OUT;n:type:ShaderForge.SFN_Vector1,id:2064,x:32603,y:32831,varname:node_2064,prsc:2,v1:0;n:type:ShaderForge.SFN_Slider,id:8204,x:30996,y:32879,ptovrint:False,ptlb:Dissolve Amount,ptin:_DissolveAmount,varname:node_8204,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0,max:1;n:type:ShaderForge.SFN_Add,id:1638,x:31668,y:32879,varname:node_1638,prsc:2|A-9398-OUT,B-9179-OUT;n:type:ShaderForge.SFN_RemapRange,id:9398,x:31478,y:32879,varname:node_9398,prsc:2,frmn:0,frmx:1,tomn:-0.8,tomx:0.8|IN-5996-OUT;n:type:ShaderForge.SFN_OneMinus,id:5996,x:31320,y:32879,varname:node_5996,prsc:2|IN-8204-OUT;n:type:ShaderForge.SFN_RemapRange,id:7214,x:31874,y:32916,varname:node_7214,prsc:2,frmn:0,frmx:1,tomn:-4,tomx:4|IN-1638-OUT;n:type:ShaderForge.SFN_Clamp01,id:536,x:32098,y:32879,varname:node_536,prsc:2|IN-7214-OUT;n:type:ShaderForge.SFN_OneMinus,id:2236,x:32270,y:32879,varname:node_2236,prsc:2|IN-536-OUT;n:type:ShaderForge.SFN_Tex2d,id:4786,x:32833,y:32653,ptovrint:False,ptlb:Diffuse,ptin:_Diffuse,varname:node_4786,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:b66bceaf0cc0ace4e9bdc92f14bba709,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:5101,x:32833,y:32831,ptovrint:False,ptlb:Normal,ptin:_Normal,varname:node_5101,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:bbab0a6f7bae9cf42bf057d8ee2755f6,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Vector1,id:7058,x:32991,y:32750,varname:node_7058,prsc:2,v1:0;n:type:ShaderForge.SFN_Noise,id:7893,x:31187,y:33253,varname:node_7893,prsc:2|XY-5585-UVOUT;n:type:ShaderForge.SFN_TexCoord,id:5585,x:30970,y:33253,varname:node_5585,prsc:2,uv:0;n:type:ShaderForge.SFN_Add,id:9179,x:31645,y:33133,varname:node_9179,prsc:2|A-5585-U,B-9705-OUT;n:type:ShaderForge.SFN_Multiply,id:9705,x:31408,y:33295,varname:node_9705,prsc:2|A-290-R,B-1150-OUT,C-7893-OUT;n:type:ShaderForge.SFN_Vector1,id:1150,x:31187,y:33372,varname:node_1150,prsc:2,v1:0.2;n:type:ShaderForge.SFN_Tex2d,id:290,x:31187,y:33105,ptovrint:False,ptlb:Noise,ptin:_Noise,varname:node_290,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:28c7aad1372ff114b90d330f8a2dd938,ntxv:0,isnm:False;proporder:2966-8204-4786-5101-290;pass:END;sub:END;*/
 
-Shader "Shader Forge/BurnAway" {
+Shader "Shader Forge/Scorched" {
     Properties {
         _BurnTexture ("Burn Texture", 2D) = "white" {}
-        _Noise ("Noise", 2D) = "white" {}
-        _DissolveAmount ("Dissolve Amount", Range(0, 1)) = 1
+        _DissolveAmount ("Dissolve Amount", Range(0, 1)) = 0
         _Diffuse ("Diffuse", 2D) = "white" {}
         _Normal ("Normal", 2D) = "bump" {}
+        _Noise ("Noise", 2D) = "white" {}
         [HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
     }
     SubShader {
@@ -39,10 +39,10 @@ Shader "Shader Forge/BurnAway" {
             #pragma exclude_renderers gles3 metal d3d11_9x xbox360 xboxone ps3 ps4 psp2 
             #pragma target 3.0
             uniform sampler2D _BurnTexture; uniform float4 _BurnTexture_ST;
-            uniform sampler2D _Noise; uniform float4 _Noise_ST;
             uniform float _DissolveAmount;
             uniform sampler2D _Diffuse; uniform float4 _Diffuse_ST;
             uniform sampler2D _Normal; uniform float4 _Normal_ST;
+            uniform sampler2D _Noise; uniform float4 _Noise_ST;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -84,7 +84,7 @@ Shader "Shader Forge/BurnAway" {
                 float2 node_7893_skew = i.uv0 + 0.2127+i.uv0.x*0.3713*i.uv0.y;
                 float2 node_7893_rnd = 4.789*sin(489.123*(node_7893_skew));
                 float node_7893 = frac(node_7893_rnd.x*node_7893_rnd.y*(1+node_7893_skew.x));
-                float3 node_1638 = (((1.0 - _DissolveAmount)*1.6+-0.8)+(_Noise_var.rgb+(node_7893*0.3)));
+                float node_1638 = (((1.0 - _DissolveAmount)*1.6+-0.8)+(i.uv0.r+(_Noise_var.r*0.2*node_7893)));
                 clip(node_1638 - 0.5);
                 float3 lightDirection = normalize(_WorldSpaceLightPos0.xyz);
                 float3 lightColor = _LightColor0.rgb;
@@ -149,7 +149,7 @@ Shader "Shader Forge/BurnAway" {
                 indirectDiffuse += UNITY_LIGHTMODEL_AMBIENT.rgb; // Ambient Light
                 float3 diffuse = (directDiffuse + indirectDiffuse) * diffuseColor;
 ////// Emissive:
-                float4 node_7469 = float4((1.0 - saturate((node_1638*8.0+-4.0))),0.0);
+                float2 node_7469 = float2((1.0 - saturate((node_1638*8.0+-4.0))),0.0);
                 float4 node_1498 = tex2D(_BurnTexture,TRANSFORM_TEX(node_7469, _BurnTexture));
                 float3 emissive = node_1498.rgb;
 /// Final Color:
@@ -181,10 +181,10 @@ Shader "Shader Forge/BurnAway" {
             #pragma exclude_renderers gles3 metal d3d11_9x xbox360 xboxone ps3 ps4 psp2 
             #pragma target 3.0
             uniform sampler2D _BurnTexture; uniform float4 _BurnTexture_ST;
-            uniform sampler2D _Noise; uniform float4 _Noise_ST;
             uniform float _DissolveAmount;
             uniform sampler2D _Diffuse; uniform float4 _Diffuse_ST;
             uniform sampler2D _Normal; uniform float4 _Normal_ST;
+            uniform sampler2D _Noise; uniform float4 _Noise_ST;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -225,7 +225,7 @@ Shader "Shader Forge/BurnAway" {
                 float2 node_7893_skew = i.uv0 + 0.2127+i.uv0.x*0.3713*i.uv0.y;
                 float2 node_7893_rnd = 4.789*sin(489.123*(node_7893_skew));
                 float node_7893 = frac(node_7893_rnd.x*node_7893_rnd.y*(1+node_7893_skew.x));
-                float3 node_1638 = (((1.0 - _DissolveAmount)*1.6+-0.8)+(_Noise_var.rgb+(node_7893*0.3)));
+                float node_1638 = (((1.0 - _DissolveAmount)*1.6+-0.8)+(i.uv0.r+(_Noise_var.r*0.2*node_7893)));
                 clip(node_1638 - 0.5);
                 float3 lightDirection = normalize(lerp(_WorldSpaceLightPos0.xyz, _WorldSpaceLightPos0.xyz - i.posWorld.xyz,_WorldSpaceLightPos0.w));
                 float3 lightColor = _LightColor0.rgb;
@@ -293,8 +293,8 @@ Shader "Shader Forge/BurnAway" {
             #pragma multi_compile_fog
             #pragma exclude_renderers gles3 metal d3d11_9x xbox360 xboxone ps3 ps4 psp2 
             #pragma target 3.0
-            uniform sampler2D _Noise; uniform float4 _Noise_ST;
             uniform float _DissolveAmount;
+            uniform sampler2D _Noise; uniform float4 _Noise_ST;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float2 texcoord0 : TEXCOORD0;
@@ -315,7 +315,7 @@ Shader "Shader Forge/BurnAway" {
                 float2 node_7893_skew = i.uv0 + 0.2127+i.uv0.x*0.3713*i.uv0.y;
                 float2 node_7893_rnd = 4.789*sin(489.123*(node_7893_skew));
                 float node_7893 = frac(node_7893_rnd.x*node_7893_rnd.y*(1+node_7893_skew.x));
-                float3 node_1638 = (((1.0 - _DissolveAmount)*1.6+-0.8)+(_Noise_var.rgb+(node_7893*0.3)));
+                float node_1638 = (((1.0 - _DissolveAmount)*1.6+-0.8)+(i.uv0.r+(_Noise_var.r*0.2*node_7893)));
                 clip(node_1638 - 0.5);
                 SHADOW_CASTER_FRAGMENT(i)
             }
