@@ -197,7 +197,8 @@ public class Drone : MonoBehaviour
     }
 
     public void KillDrone()
-    {
+	{
+		ControllerVibrate.Vibrate(1);
         Instantiate(deathSound, transform.position, transform.rotation);
         Instantiate(deathParticle, transform.position, transform.rotation);
         AgentHandler.myDrones.Remove(this);
