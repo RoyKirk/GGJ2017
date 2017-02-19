@@ -14,6 +14,7 @@ public class ReflectScript : MonoBehaviour
     public float reflectDuration = 0.3f;
 
     public GameObject reflectAnim;
+    public bool wall;
 
     // Use this for initialization
     void Start()
@@ -27,23 +28,32 @@ public class ReflectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentReflectDelay += Time.deltaTime;
-        if (currentReflectDelay >= ReflectDelay)
+        if(wall)
         {
-            if (Controller.state[player].Buttons.X == XInputDotNetPure.ButtonState.Pressed)
+            collider.enabled = true;
+            reflectAnim.SetActive(true);
+        }
+        else
+        {
+            currentReflectDelay += Time.deltaTime;
+            if (currentReflectDelay >= ReflectDelay)
             {
-                collider.enabled = true;
-                currentReflectDelay = 0;
-                reflectAnim.SetActive(true);
-                //still need to reset this so it turns off, maybe use a bool to control duration, eg. see thrust
+                if (Controller.state[player].Buttons.X == XInputDotNetPure.ButtonState.Pressed)
+                {
+                    collider.enabled = true;
+                    currentReflectDelay = 0;
+                    reflectAnim.SetActive(true);
+                    //still need to reset this so it turns off, maybe use a bool to control duration, eg. see thrust
+                }
+            }
+
+            if (currentReflectDelay >= reflectDuration)
+            {
+                reflectAnim.SetActive(false);
+                collider.enabled = false;
             }
         }
-
-        if (currentReflectDelay >= reflectDuration)
-        {
-            reflectAnim.SetActive(false);
-            collider.enabled = false;
-        }
+        
     }
 }
 

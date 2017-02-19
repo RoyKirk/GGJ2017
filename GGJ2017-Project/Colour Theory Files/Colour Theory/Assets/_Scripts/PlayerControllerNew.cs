@@ -25,7 +25,8 @@ public class PlayerControllerNew : MonoBehaviour
     private Vector3 lookDirection;
 
     public float turnSpeed = 2;
-
+    public float rapidTurnSpeed = 1;
+    float currentTurnSpeed;
 
     public GameObject FireBallPrefab;
     public GameObject shootPos;
@@ -50,6 +51,7 @@ public class PlayerControllerNew : MonoBehaviour
     public float ThrustSpeed = 2;
     public bool Thrusting = false;
 
+    public bool RapidFiring;
 
     //public float ThrustCollisionForce;
     //public float ThrustRadius;
@@ -63,13 +65,31 @@ public class PlayerControllerNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(vibrate)
+        {
+            currentvibrationDuration += Time.deltaTime;
+            if(currentvibrationDuration >= vibrationDuration)
+            {
+                XInputDotNetPure.GamePad.SetVibration((XInputDotNetPure.PlayerIndex)0, 0, 0);
+                currentvibrationDuration = 0;
+                vibrate = false;
+            }
+        }
+
         if(transform.position.y < -1)
         {
             Destroy(gameObject);
         }
 
-        if(Thrusting)
+
+        if(RapidFiring)
         {
+            Rotate();
+            currentTurnSpeed = rapidTurnSpeed;
+        }
+        else if(Thrusting)
+        {
+            currentTurnSpeed = turnSpeed;
             //PlayerThrustCollision();
             currentThrustDuration += Time.deltaTime;
             if(currentThrustDuration >= ThrustDuration)
@@ -85,6 +105,7 @@ public class PlayerControllerNew : MonoBehaviour
         }
         else
         {
+            currentTurnSpeed = turnSpeed;
             ThumbstickMove();
             Rotate();
             ShootFireBall();
@@ -163,7 +184,7 @@ public class PlayerControllerNew : MonoBehaviour
             lookDirection = Quaternion.AngleAxis(0, Vector3.up) * lookDirection;
             //transform.right = lookDirection;
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), Time.deltaTime * turnSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDirection), Time.deltaTime * currentTurnSpeed);
         }
     }
 
@@ -180,15 +201,21 @@ public class PlayerControllerNew : MonoBehaviour
         {
             if (c.gameObject.tag == "Player" || c.gameObject.tag == "Object")
             {
-                Debug.Log("hit PLayer");
-                c.rigidbody.AddExplosionForce(ThrustExplosiveForce, transform.position, PlayerThrustRadius);
-                c.rigidbody.AddForce(Rb.velocity);
-                speed = speed / ThrustSpeed;
-                VelocityClamp = VelocityClamp / ThrustSpeed;
-                Thrusting = false;
-                Rb.velocity = Vector3.zero;
-                currentThrustDuration = 0;
-                ThrustAnim.SetActive(false);
+                if (c.gameObject.GetComponent<PlayerControllerNew>() != null)
+                {
+                    c.gameObject.GetComponent<PlayerControllerNew>().Vibration();
+                }
+                if (c.rigidbody != null)
+                {
+                    c.rigidbody.AddExplosionForce(ThrustExplosiveForce, transform.position, PlayerThrustRadius);
+                    c.rigidbody.AddForce(Rb.velocity);
+                    speed = speed / ThrustSpeed;
+                    VelocityClamp = VelocityClamp / ThrustSpeed;
+                    Thrusting = false;
+                    Rb.velocity = Vector3.zero;
+                    currentThrustDuration = 0;
+                    ThrustAnim.SetActive(false);
+                }
             }
             else if (c.gameObject.tag == "Reflect")
             {
@@ -268,7 +295,16 @@ public class PlayerControllerNew : MonoBehaviour
         }
     }
 
-    
+    public float vibrationDuration = 0.1f;
+    float currentvibrationDuration;
+
+    bool vibrate;
+
+    public void Vibration()
+    {
+        vibrate = true;
+        XInputDotNetPure.GamePad.SetVibration((XInputDotNetPure.PlayerIndex)0, 1, 1);
+    }
 }
 
 
