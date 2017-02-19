@@ -118,7 +118,7 @@ public class GroundBlocks : MonoBehaviour
             else
             {
                 vaporise = false;
-                Mat.SetColor("_Highlighted", Color.black);
+                Mat.SetColor("_Highlighted", Color.black); 
             }
         }
 
