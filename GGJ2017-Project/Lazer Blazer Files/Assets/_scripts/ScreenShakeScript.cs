@@ -22,6 +22,7 @@ public class ScreenShakeScript : MonoBehaviour {
         if (Input.GetKey("escape"))
         {
             PauseScreen.SetActive(true);
+            Time.timeScale = 0.0f;
         }
         if (shake > 0)
         {
