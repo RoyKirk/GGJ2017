@@ -48,63 +48,44 @@ public class LaserSpawnScript : LASERSegmentScript {
         //script new lasers
 
         //direction,colour,stregnth,speed,delay
+        spawns.Add(new LaserSpawn(S, red, 2, 1, 15f));
+        spawns.Add(new LaserSpawn(E, blue, 2, 1, 30f));
 
+        spawns.Add(new LaserSpawn(N, yellow, 2, 1, 60f));
+        spawns.Add(new LaserSpawn(W, purple, 2, 1, 60f));
 
+        spawns.Add(new LaserSpawn(E, red, 2, 1, 90f));
+        spawns.Add(new LaserSpawn(E, blue, 2, 1, 100f));
+        spawns.Add(new LaserSpawn(E, red, 2, 1, 110f));
+        spawns.Add(new LaserSpawn(E, blue, 2, 1, 120f));
 
-        spawns.Add(new LaserSpawn(E, purple, 1, 1, 15f));
-        spawns.Add(new LaserSpawn(S, blue, 1, 1, 30f));
-        spawns.Add(new LaserSpawn(W, red, 1, 1, 35f));
-        spawns.Add(new LaserSpawn(N, green, 1, 1, 40f));
+        spawns.Add(new LaserSpawn(N, yellow, 2, 1, 150f));
+        spawns.Add(new LaserSpawn(W, purple, 2, 1, 160f));
+        spawns.Add(new LaserSpawn(S, yellow, 2, 1, 170f));
+        spawns.Add(new LaserSpawn(N, purple, 2, 1, 180f));
+        spawns.Add(new LaserSpawn(W, yellow, 2, 1, 190f));
+        spawns.Add(new LaserSpawn(S, purple, 2, 1, 200f));
 
-        spawns.Add(new LaserSpawn(E, purple, 1, 1, 55f));
-        spawns.Add(new LaserSpawn(S, blue, 1, 1, 80f));
-        spawns.Add(new LaserSpawn(W, red, 1, 1, 85f));
-        spawns.Add(new LaserSpawn(N, green, 1, 1, 90f));
+        spawns.Add(new LaserSpawn(E, red, 2, 1, 230f));
+        spawns.Add(new LaserSpawn(E, blue, 2, 1, 240f));
+        spawns.Add(new LaserSpawn(E, red, 2, 1, 250f));
+        spawns.Add(new LaserSpawn(E, blue, 2, 1, 260f));
 
+        spawns.Add(new LaserSpawn(N, yellow, 2, 1, 300f));
+        spawns.Add(new LaserSpawn(W, purple, 2, 1, 305f));
+        spawns.Add(new LaserSpawn(S, yellow, 2, 1, 310f));
+        spawns.Add(new LaserSpawn(N, purple, 2, 1, 315f));
+        spawns.Add(new LaserSpawn(W, yellow, 2, 1, 320f));
+        spawns.Add(new LaserSpawn(S, purple, 2, 1, 325f));
 
-        spawns.Add(new LaserSpawn(E, purple, 1, 1, 105f));
-        spawns.Add(new LaserSpawn(E, purple, 1, 1, 108f));
-        spawns.Add(new LaserSpawn(E, purple, 1, 1, 111f));
-        spawns.Add(new LaserSpawn(S, blue, 1, 1, 130f));
-        spawns.Add(new LaserSpawn(S, blue, 1, 1, 133f));
-        spawns.Add(new LaserSpawn(S, blue, 1, 1, 136f));
-        spawns.Add(new LaserSpawn(W, red, 1, 1, 135f));
-        spawns.Add(new LaserSpawn(W, red, 1, 1, 138f));
-        spawns.Add(new LaserSpawn(W, red, 1, 1, 141f));
-        spawns.Add(new LaserSpawn(N, green, 1, 1, 140f));
-        spawns.Add(new LaserSpawn(N, green, 1, 1, 143f));
-        spawns.Add(new LaserSpawn(N, green, 1, 1, 146f));
-
-        spawns.Add(new LaserSpawn(E, purple, 1, 1, 155f));
-        spawns.Add(new LaserSpawn(S, blue, 1, 1, 180f));
-        spawns.Add(new LaserSpawn(W, red, 1, 1, 185f));
-        spawns.Add(new LaserSpawn(N, green, 1, 1, 190f));
-
-        spawns.Add(new LaserSpawn(E, purple, 1, 1, 205f));
-        spawns.Add(new LaserSpawn(S, blue, 1, 1, 230f));
-        spawns.Add(new LaserSpawn(W, red, 1, 1, 235f));
-        spawns.Add(new LaserSpawn(N, green, 1, 1, 240f));
-
-        spawns.Add(new LaserSpawn(E, purple, 1, 1, 255f));
-        spawns.Add(new LaserSpawn(E, purple, 1, 1, 258f));
-        spawns.Add(new LaserSpawn(E, purple, 1, 1, 261f));
-        spawns.Add(new LaserSpawn(S, blue, 1, 1, 280f));
-        spawns.Add(new LaserSpawn(S, blue, 1, 1, 283f));
-        spawns.Add(new LaserSpawn(S, blue, 1, 1, 286f));
-        spawns.Add(new LaserSpawn(W, red, 1, 1, 285f));
-        spawns.Add(new LaserSpawn(W, red, 1, 1, 288f));
-        spawns.Add(new LaserSpawn(W, red, 1, 1, 291f));
-        spawns.Add(new LaserSpawn(N, green, 1, 1, 290f));
-        spawns.Add(new LaserSpawn(N, green, 1, 1, 293f));
-        spawns.Add(new LaserSpawn(N, green, 1, 1, 296f));
-
-        spawns.Add(new LaserSpawn(E, purple, 1, 1, 305f));
-
-
-
-
-
-        //level end
+        spawns.Add(new LaserSpawn(E, red, 2, 1, 330f));
+        spawns.Add(new LaserSpawn(E, blue, 2, 1, 335f));
+        spawns.Add(new LaserSpawn(E, red, 2, 1, 340f));
+        spawns.Add(new LaserSpawn(E, blue, 2, 1, 355f));
+        spawns.Add(new LaserSpawn(E, red, 2, 1, 370f));
+        spawns.Add(new LaserSpawn(E, blue, 2, 1, 380f));
+        spawns.Add(new LaserSpawn(E, red, 2, 1, 390f));
+        spawns.Add(new LaserSpawn(E, blue, 2, 1, 400f));
         //level end
 
 
