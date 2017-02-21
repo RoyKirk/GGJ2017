@@ -80,7 +80,7 @@ public class GroundBlocks : MonoBehaviour
             if (Mat.GetFloat("_DissolveAmount") > 0.0f)
             {
                 Mat.SetFloat("_DissolveAmount", Mat.GetFloat("_DissolveAmount") - 0.5f * Time.deltaTime);
-                Mat.SetColor("_Highlighted", new Vector4(0.1F,0,0.1f,1));
+                Mat.SetColor("_Highlighted", new Vector4(0.05F,0,0.05f,1.0f));
             }
             else
             {
@@ -113,7 +113,7 @@ public class GroundBlocks : MonoBehaviour
             if (Mat.GetFloat("_DissolveAmount") < 1.0f)
             {
                 Mat.SetFloat("_DissolveAmount", Mat.GetFloat("_DissolveAmount") + 0.5f * Time.deltaTime);
-                Mat.SetColor("_Highlighted", new Vector4(0.2f, 0.1f, 0, 1));
+                Mat.SetColor("_Highlighted", new Vector4(0.05f, 0.025f, 0, 1.0f));
             }
             else
             {
@@ -244,7 +244,10 @@ public class GroundBlocks : MonoBehaviour
                 Mat.SetColor("_Highlighted", Color.black);
             }
         }
-
+        else
+        {
+            Mat.SetColor("_Highlighted", Color.black);
+        }
 
         //if (Depleted)
         //{
