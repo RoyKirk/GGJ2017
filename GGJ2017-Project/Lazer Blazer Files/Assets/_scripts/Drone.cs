@@ -37,7 +37,7 @@ public class Drone : MonoBehaviour
     {
         myState = DroneState.Idle;
         myAgent = GetComponent<NavMeshAgent>();
-        myAgent.avoidancePriority = Random.Range(50, 100);
+        //myAgent.avoidancePriority = Random.Range(50, 100);
         AgentHandler.myDrones.Add(this);
 	}
 	
@@ -72,6 +72,7 @@ public class Drone : MonoBehaviour
                 {
                     isCarryingResource = false;
                     AgentHandler.resourcesInBase++;
+					ControllerVibrate.Vibrate(0.15f, 0.1f);
                     myState = DroneState.Idle;
                 }
                 break;
@@ -124,10 +125,10 @@ public class Drone : MonoBehaviour
                         {
                             myBuildTime = 0;
                             isCarryingResource = false;
-                            myState = DroneState.Idle;
                             myDestination.buildAnimator.SetActive(false);
                             myDestination.assignedTask = false;
-                            myDestination.CreateBuilding();
+							myDestination.CreateBuilding();
+							myState = DroneState.Idle;
                             myAudio.clip = buildSound;
                             myAudio.Play();
                         }
@@ -198,7 +199,7 @@ public class Drone : MonoBehaviour
 
     public void KillDrone()
 	{
-		ControllerVibrate.Vibrate(1);
+		ControllerVibrate.Vibrate(1, 0.5f);
         Instantiate(deathSound, transform.position, transform.rotation);
         Instantiate(deathParticle, transform.position, transform.rotation);
         AgentHandler.myDrones.Remove(this);

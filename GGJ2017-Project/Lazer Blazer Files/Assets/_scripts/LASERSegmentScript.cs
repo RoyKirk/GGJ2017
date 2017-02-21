@@ -247,6 +247,7 @@ public class LASERSegmentScript : MonoBehaviour {
         {
             GameObject.Find("Camera").GetComponent<ScreenShakeScript>().Shake();
             Destroy(collider.gameObject);
+			ControllerVibrate.Vibrate(0.3f, 0.3f);
             GameObject.Find("Camera").GetComponent<ScreenShakeScript>().DefeatScreen.SetActive(true);
             //StartCoroutine(RestartLevel());
 

@@ -17,7 +17,11 @@ public class Cursor : MonoBehaviour
 	void Update () 
 	{
 		Move ();
-		CheckInput ();
+
+		if (m_handler != null) 
+		{
+			CheckInput ();
+		}
 	}
 
 	void Move()
@@ -99,12 +103,12 @@ public class Cursor : MonoBehaviour
 
 				else if (currentblock.isDigOrder) 
 				{
-					AgentHandler.digOrders.Remove (currentblock);
+					AgentHandler.digOrders.Remove(currentblock);
 				} 
 
-				else 
+				else if (currentblock.isBuildOrder)
 				{
-					AgentHandler.buildOrders.Remove (currentblock);
+					AgentHandler.buildOrders.Remove(currentblock);
 				}
 			}
 			m_handler.myAudio.Play();

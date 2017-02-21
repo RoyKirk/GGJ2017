@@ -31,7 +31,7 @@ public class AgentHandler : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetMouseButtonDown(0))
+       /* if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -84,7 +84,7 @@ public class AgentHandler : MonoBehaviour
                 }
             }
             myAudio.Play();
-        }
+        }*/
 
         SpawnDrones();
 
@@ -93,8 +93,8 @@ public class AgentHandler : MonoBehaviour
             currentDrone.myBaseLocation = transform.position;
             if (digOrders.Count > 0 && currentDrone.myState == Drone.DroneState.Idle)
             {
+				currentDrone.SetDestination(digOrders[0]);
                 currentDrone.myState = Drone.DroneState.Dig;
-                currentDrone.SetDestination(digOrders[0]);
                 digOrders[0].myAssignedDrone = currentDrone;
 				digOrders[0].isDigOrder = false;
                 digOrders.RemoveAt(0);
@@ -104,9 +104,9 @@ public class AgentHandler : MonoBehaviour
             if (buildOrders.Count > 0)
             {
                 if (currentDrone.myState == Drone.DroneState.Gather)
-                {
+				{
+					currentDrone.SetDestination(buildOrders[0]);
                     currentDrone.myState = Drone.DroneState.Build;
-                    currentDrone.SetDestination(buildOrders[0]);
 					buildOrders[0].myAssignedDrone = currentDrone;
 					buildOrders[0].isBuildOrder = false;
                     buildOrders.RemoveAt(0);
@@ -116,7 +116,7 @@ public class AgentHandler : MonoBehaviour
                 else if (currentDrone.myState == Drone.DroneState.Idle && resourcesInBase > 0)
                 {
                     currentDrone.myState = Drone.DroneState.Build;
-                    currentDrone.SetDestination(buildOrders[0]);
+					currentDrone.SetDestination(buildOrders[0]);
 					buildOrders[0].myAssignedDrone = currentDrone;
 					buildOrders[0].isBuildOrder = false;
                     buildOrders.RemoveAt(0);
@@ -143,6 +143,7 @@ public class AgentHandler : MonoBehaviour
             if (droneSpawnTimer >= droneSpawnDelay)
             {
                 Instantiate(dronePrefab, transform.position, transform.rotation);
+				//ControllerVibrate.Vibrate(0.3f, 0.3f);
                 droneSpawnTimer = 0;
             }
         }
