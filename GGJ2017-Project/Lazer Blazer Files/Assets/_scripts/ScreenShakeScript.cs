@@ -19,7 +19,7 @@ public class ScreenShakeScript : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (Input.GetKey("escape"))
+        if (Input.GetKey("escape")|| Input.GetButton("Start_1"))
         {
             PauseScreen.SetActive(true);
             Time.timeScale = 0.0f;
