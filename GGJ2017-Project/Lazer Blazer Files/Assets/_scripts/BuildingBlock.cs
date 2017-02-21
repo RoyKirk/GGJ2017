@@ -9,6 +9,8 @@ public class BuildingBlock : MonoBehaviour
 
     public GameObject explosion;
 
+    public GameObject MaterialHolder;
+
 	NavMeshObstacle m_obstacle;
 	public float colliderDelay;
 	float colliderTimer;
@@ -16,6 +18,8 @@ public class BuildingBlock : MonoBehaviour
 	public GameObject material;
 
 	public bool toBeDemolished = false;
+
+    bool vaporise = false;
 
 	// Use this for initialization
 	void Start () 
@@ -30,6 +34,21 @@ public class BuildingBlock : MonoBehaviour
 		{
 			ActivateObstacle ();
 		}
+
+        if(vaporise)
+        {
+            if (MaterialHolder.GetComponent<MeshRenderer>().material.GetFloat("_DissolveAmount") < 1.0f)
+            {
+                MaterialHolder.GetComponent<MeshRenderer>().material.SetFloat("_DissolveAmount", MaterialHolder.GetComponent<MeshRenderer>().material.GetFloat("_DissolveAmount") + Time.deltaTime);
+            }
+            else
+            {
+                GameObject.Find("Camera").GetComponent<ScreenShakeScript>().Shake();
+
+                myLocation.canBuildOn = true;
+                Destroy(this.gameObject);
+            }
+        }
     }
 
     public void TakeDamage(float damage)
@@ -40,10 +59,7 @@ public class BuildingBlock : MonoBehaviour
         Instantiate(explosion, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(new Vector3(90,0,0)));
         if (health <= 0)
         {
-            GameObject.Find("Camera").GetComponent<ScreenShakeScript>().Shake();
-
-            myLocation.canBuildOn = true;
-            Destroy(this.gameObject);
+            vaporise = true;
         }
     }
 

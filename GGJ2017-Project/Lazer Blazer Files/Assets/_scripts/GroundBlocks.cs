@@ -32,12 +32,13 @@ public class GroundBlocks : MonoBehaviour
     public ParticleSystem buildParticle;
 
     Material Mat;
+    public GameObject MaterialHolder;
 
-    public Material DefaultMat;
-    public Material highlightedMat;
-    public Material ScorchedMat;
-    public Material HarvestedMat;
-    public Material FlashMat;
+    //public Material DefaultMat;
+    //public Material highlightedMat;
+    //public Material ScorchedMat;
+    //public Material HarvestedMat;
+    //public Material FlashMat;
 
     //flash variables
     public int timesFlashed;
@@ -48,6 +49,8 @@ public class GroundBlocks : MonoBehaviour
     bool flashing = false;
 
 
+    bool vaporise = false;
+
     //times flashed
     //duration of flash
     //time between flash
@@ -55,8 +58,8 @@ public class GroundBlocks : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        Mat = GetComponent<Renderer>().material;
-        flashing = true;
+        Mat = MaterialHolder.GetComponent<MeshRenderer>().material;
+        //flashing = true;
     }
 	
 	// Update is called once per frame
@@ -65,33 +68,58 @@ public class GroundBlocks : MonoBehaviour
         //Flash();
         Highlight();
 
-        if (currentResetTimer > 0)
+        if (currentResetTimer >= 0)
         {
             currentResetTimer -= Time.deltaTime;
             //Flash(DefaultMat);
             //GetComponent<Renderer>().material = HarvestedMat;
-            currentFlashDuration = durationOfFlash;
+            //currentFlashDuration = durationOfFlash;
         }
         else if (Depleted)
         {
-            Depleted = false;
+            if (Mat.GetFloat("_DissolveAmount") > 0.0f)
+            {
+                Mat.SetFloat("_DissolveAmount", Mat.GetFloat("_DissolveAmount") - 0.5f * Time.deltaTime);
+                Mat.SetColor("_Highlighted", new Vector4(0,0,0.1f,1));
+            }
+            else
+            {
+                Mat.SetColor("_Highlighted", Color.black);
+                Depleted = false;
+            }
             //GetComponent<Renderer>().material = DefaultMat;
-            flashAnimator.SetActive(true);
+            //flashAnimator.SetActive(true);
             //Mat = DefaultMat;
         }
 
-	    if(scorched)
+        if(scorched)
         {
             if(MaxScorchedTimer > currentResetTimer)
             {
                 currentResetTimer = MaxScorchedTimer;
-                Mat = ScorchedMat;
+                //Mat = ScorchedMat;
             }
 			CancelOrder ();
+
+            vaporise = true;
             scorched = false;
             Depleted = true;
             //shader dissolve slider hook
             //Mat.SetFloat("_DissolveAmount", Mat.GetFloat("_DissolveAmount") + 0.1f * Time.deltaTime);
+        }
+
+        if(vaporise)
+        {
+            if (Mat.GetFloat("_DissolveAmount") < 1.0f)
+            {
+                Mat.SetFloat("_DissolveAmount", Mat.GetFloat("_DissolveAmount") + 0.5f * Time.deltaTime);
+                Mat.SetColor("_Highlighted", new Vector4(0.2f, 0.1f, 0, 1));
+            }
+            else
+            {
+                vaporise = false;
+                Mat.SetColor("_Highlighted", Color.black); 
+            }
         }
 
         if(harvested)
@@ -103,6 +131,7 @@ public class GroundBlocks : MonoBehaviour
                 currentFlashDuration = durationOfFlash;
                 //Flash(HarvestedMat);
             }
+            Mat.SetFloat("_DissolveAmount", 1.0f);
             harvested = false;
             Depleted = true;
         }
@@ -148,90 +177,106 @@ public class GroundBlocks : MonoBehaviour
         }
     }
 
-    void Flash(Material resultMat)
-    {
-        if(currentFlashDuration > 0)
-        {
-            Mat = FlashMat;
+    //void Flash(Material resultMat)
+    //{
+    //    if(currentFlashDuration > 0)
+    //    {
+    //        Mat = FlashMat;
             
-        }
-        else
-        {
-            Mat = DefaultMat;
-        }
-        currentFlashDuration -= Time.deltaTime;
+    //    }
+    //    else
+    //    {
+    //        Mat = DefaultMat;
+    //    }
+    //    currentFlashDuration -= Time.deltaTime;
 
-        //times flashed
-        //duration of flash
-        //time between flash
+    //    //times flashed
+    //    //duration of flash
+    //    //time between flash
 
-        //for (int i = 0; i < timesFlashed; i++)
-        //{
-        //    
-        //    if(currentFlashDuration > 0)
-        //    {
-        //        currentFlashDuration -= Time.deltaTime;
-        //        Mat = FlashMat;
-        //    }
-        //    else
-        //    {
-        //        Mat = resultMat;
-        //    }
-        //}
+    //    //for (int i = 0; i < timesFlashed; i++)
+    //    //{
+    //    //    
+    //    //    if(currentFlashDuration > 0)
+    //    //    {
+    //    //        currentFlashDuration -= Time.deltaTime;
+    //    //        Mat = FlashMat;
+    //    //    }
+    //    //    else
+    //    //    {
+    //    //        Mat = resultMat;
+    //    //    }
+    //    //}
 
-        //if (currentFlashDuration > 0)
-        //{
-        //    currentFlashDuration -= Time.deltaTime;
-        //    Mat = FlashMat;
-        //}
-        //else if(currentTimeBetweenFlash > 0)
-        //{
-        //    currentTimeBetweenFlash -= Time.deltaTime;
-        //    Mat = resultMat;
-        //}
-        //else if(currentFlashDuration <= 0)
-        //{
-        //    currentTimeBetweenFlash = timeBetweenFlash;
-        //}
-        //else if(currentTimeBetweenFlash <= 0)
-        //{
-        //    currentFlashDuration = durationOfFlash;
-        //}
-    }
+    //    //if (currentFlashDuration > 0)
+    //    //{
+    //    //    currentFlashDuration -= Time.deltaTime;
+    //    //    Mat = FlashMat;
+    //    //}
+    //    //else if(currentTimeBetweenFlash > 0)
+    //    //{
+    //    //    currentTimeBetweenFlash -= Time.deltaTime;
+    //    //    Mat = resultMat;
+    //    //}
+    //    //else if(currentFlashDuration <= 0)
+    //    //{
+    //    //    currentTimeBetweenFlash = timeBetweenFlash;
+    //    //}
+    //    //else if(currentTimeBetweenFlash <= 0)
+    //    //{
+    //    //    currentFlashDuration = durationOfFlash;
+    //    //}
+    //}
 
     void Highlight()
     {
-        if (Depleted)
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, 100f))
         {
-            groundTexture.GetComponent<Renderer>().material = HarvestedMat;
-
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, 100f))
+            if (hit.transform.gameObject.GetComponent<GroundBlocks>() == this)
             {
-                if (hit.transform.gameObject.GetComponent<GroundBlocks>() == this)
-                {
-                    groundTexture.GetComponent<Renderer>().material = ScorchedMat;
-                }
+                Mat.SetColor("_Highlighted", new Vector4(0.1f,0.1f,0.1f,1.0f));
+            }
+            else
+            {
+                Mat.SetColor("_Highlighted", Color.black);
             }
         }
 
-        else
-        {
-            groundTexture.GetComponent<Renderer>().material = DefaultMat;
 
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //if (Depleted)
+        //{
+        //    groundTexture.GetComponent<Renderer>().material = HarvestedMat;
 
-            if (Physics.Raycast(ray, out hit, 100f))
-            {
-                if (hit.transform.gameObject.GetComponent<GroundBlocks>() == this)
-                {
-                    groundTexture.GetComponent<Renderer>().material = highlightedMat;
-                }
-            }
-        }
+        //    RaycastHit hit;
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //    if (Physics.Raycast(ray, out hit, 100f))
+        //    {
+        //        if (hit.transform.gameObject.GetComponent<GroundBlocks>() == this)
+        //        {
+        //            groundTexture.GetComponent<Renderer>().material = ScorchedMat;
+        //        }
+        //    }
+        //}
+
+        //else
+        //{
+        //    groundTexture.GetComponent<Renderer>().material = DefaultMat;
+
+        //    RaycastHit hit;
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        //    if (Physics.Raycast(ray, out hit, 100f))
+        //    {
+        //        if (hit.transform.gameObject.GetComponent<GroundBlocks>() == this)
+        //        {
+        //            groundTexture.GetComponent<Renderer>().material = highlightedMat;
+        //        }
+        //    }
+        //}
     }
 }
 

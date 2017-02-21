@@ -19,5 +19,6 @@ public class LoadGameScript : MonoBehaviour {
     public void ContinueGame()
     {
         transform.parent.gameObject.SetActive(false);
+        Time.timeScale = 1.0f;
     }
 }
