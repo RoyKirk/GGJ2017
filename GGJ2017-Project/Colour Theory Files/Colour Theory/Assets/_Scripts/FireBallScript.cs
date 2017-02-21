@@ -35,7 +35,10 @@ public class FireBallScript : MonoBehaviour
         }
         else if(currentDestructionTimer >= 0.75f)
         {
-            Physics.IgnoreCollision(GetComponent<Collider>(), playerCollider, false);
+            if(playerCollider != null)
+            {
+                Physics.IgnoreCollision(GetComponent<Collider>(), playerCollider, false);
+            }
         }
 
         

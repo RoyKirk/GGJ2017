@@ -70,7 +70,7 @@ public class PlayerControllerNew : MonoBehaviour
             currentvibrationDuration += Time.deltaTime;
             if(currentvibrationDuration >= vibrationDuration)
             {
-                XInputDotNetPure.GamePad.SetVibration((XInputDotNetPure.PlayerIndex)0, 0, 0);
+                XInputDotNetPure.GamePad.SetVibration((XInputDotNetPure.PlayerIndex)player, 0, 0);
                 currentvibrationDuration = 0;
                 vibrate = false;
             }
@@ -261,7 +261,8 @@ public class PlayerControllerNew : MonoBehaviour
         if(currentThrustDelay >= ThrustDelay)
         {
             //if (Controller.state[player].Triggers.Left >= thumbXDeadZone)
-            if(Controller.state[player].Buttons.B == XInputDotNetPure.ButtonState.Pressed)
+            //if(Controller.state[player].Buttons.B == XInputDotNetPure.ButtonState.Pressed)
+            if(Controller.state[player].Triggers.Left >= thumbXDeadZone)
             {
                 speed = speed * ThrustSpeed;
                 VelocityClamp = VelocityClamp * ThrustSpeed;
@@ -303,7 +304,7 @@ public class PlayerControllerNew : MonoBehaviour
     public void Vibration()
     {
         vibrate = true;
-        XInputDotNetPure.GamePad.SetVibration((XInputDotNetPure.PlayerIndex)0, 1, 1);
+        XInputDotNetPure.GamePad.SetVibration((XInputDotNetPure.PlayerIndex)player, 1, 1);
     }
 }
 

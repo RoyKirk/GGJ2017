@@ -35,7 +35,8 @@ public class PlayerPulseScript : MonoBehaviour
         currentPulseDelay += Time.deltaTime;
         if(currentPulseDelay >= pulseDelay)
         {
-            if (Controller.state[player].Buttons.A == XInputDotNetPure.ButtonState.Pressed)
+            //if (Controller.state[player].Buttons.A == XInputDotNetPure.ButtonState.Pressed)
+            if(Controller.state[player].Triggers.Left >= 0.2)
             {
                 collider.enabled = true;
                 currentPulseDelay = 0;
