@@ -41,7 +41,8 @@ public class BuildingBlock : MonoBehaviour
             {
                 MaterialHolder.GetComponent<MeshRenderer>().material.SetFloat("_DissolveAmount", MaterialHolder.GetComponent<MeshRenderer>().material.GetFloat("_DissolveAmount") + Time.deltaTime);
             }
-            else
+            
+			else
             {
                 GameObject.Find("Camera").GetComponent<ScreenShakeScript>().Shake();
 
@@ -53,7 +54,7 @@ public class BuildingBlock : MonoBehaviour
 
     public void TakeDamage(float damage)
 	{
-		ControllerVibrate.Vibrate(1);
+		ControllerVibrate.Vibrate(0.4f, 0.5f);
         health -= damage;
 		material.GetComponent<Renderer>().material.color = Color.red;
         Instantiate(explosion, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(new Vector3(90,0,0)));

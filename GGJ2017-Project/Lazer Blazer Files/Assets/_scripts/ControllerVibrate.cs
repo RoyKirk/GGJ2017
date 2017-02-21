@@ -27,9 +27,9 @@ public class ControllerVibrate : MonoBehaviour
 		}
 	}
 
-	public static void Vibrate(float duration)
+	public static void Vibrate(float duration, float intensity)
 	{
 		timer = duration;
-		GamePad.SetVibration(PlayerIndex.One, 1, 1);
+		GamePad.SetVibration(PlayerIndex.One, intensity, intensity);
 	}
 }
