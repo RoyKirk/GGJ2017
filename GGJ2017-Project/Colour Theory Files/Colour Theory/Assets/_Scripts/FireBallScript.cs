@@ -74,7 +74,7 @@ public class FireBallScript : MonoBehaviour
                 //Debug.Log("hit player");
                 c.rigidbody.AddExplosionForce(ExplosiveForce, transform.position, Radius);
                 //c.rigidbody.AddExplosionForce(ExplosiveForce, Rb.velocity, Radius);
-                c.rigidbody.AddForce(Rb.velocity);// + transform.rotation.eulerAngles);
+                c.rigidbody.AddForce(Rb.velocity / 2);// + transform.rotation.eulerAngles);
                                                   //c.rigidbody.AddForce(c.impulse);
                                                   //c.rigidbody.velocity += Rb.velocity;
                 
