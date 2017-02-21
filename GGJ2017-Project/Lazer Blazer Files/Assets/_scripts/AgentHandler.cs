@@ -143,7 +143,7 @@ public class AgentHandler : MonoBehaviour
             if (droneSpawnTimer >= droneSpawnDelay)
             {
                 Instantiate(dronePrefab, transform.position, transform.rotation);
-				ControllerVibrate.Vibrate(0.3f, 0.3f);
+				//ControllerVibrate.Vibrate(0.3f, 0.3f);
                 droneSpawnTimer = 0;
             }
         }
