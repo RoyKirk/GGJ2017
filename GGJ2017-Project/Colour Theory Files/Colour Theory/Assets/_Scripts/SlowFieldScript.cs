@@ -13,8 +13,22 @@ public class SlowFieldScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	
-	}
+        Debug.DrawRay(transform.position, Vector3.down);
+
+        Vector3 dwn = transform.TransformDirection(Vector3.down);
+        //
+        RaycastHit hit;
+        //
+        Ray rayLeft = new Ray(transform.position, dwn);
+        
+        if (Physics.Raycast(rayLeft, out hit, 10f))
+        {
+            if (hit.distance >= 4)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 
     Rigidbody Rb;
 

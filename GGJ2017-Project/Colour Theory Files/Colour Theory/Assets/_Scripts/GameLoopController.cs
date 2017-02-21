@@ -16,7 +16,15 @@ public class GameLoopController : MonoBehaviour
         Players = GameObject.FindGameObjectsWithTag("Player");
         if(Players.Length <= 1)
         {
-            Application.LoadLevel(0);
+            Application.LoadLevel(1);
+        }
+
+        for(int i =0; i < Players.Length;i++)
+        {
+            if(Controller.state[i].Buttons.Start == XInputDotNetPure.ButtonState.Pressed && Controller.connected[i] == true)
+            {
+                Application.LoadLevel(0);
+            }
         }
 	}
 }

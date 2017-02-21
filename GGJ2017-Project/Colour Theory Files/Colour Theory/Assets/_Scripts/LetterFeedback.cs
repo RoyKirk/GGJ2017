@@ -13,24 +13,36 @@ public class LetterFeedback : MonoBehaviour
 
     bool expand = true;
 
-    float increment;
+    public float MaxDuration = 3;
+    float duration = 0;
 
-    Vector3 scaleMod = new Vector3(0, 10, 0);
+    public float scaleMod = 2;
 
 	// Update is called once per frame
 	void Update ()
     {
+        duration += Time.deltaTime;
+        if(duration >= MaxDuration)
+        {
+            expand = !expand;
+            duration = 0;
+        }
+
 	    if(animate)
         {
             if(expand)
             {
-                //transform.localScale += new Vector3(0, 1, 0) * Time.deltaTime;
+                transform.localScale += new Vector3(0, scaleMod, 0) * Time.deltaTime;
             }
             else
             {
-                transform.localScale += new Vector3(0, -1, 0) * Time.deltaTime;
+                transform.localScale += new Vector3(0, -scaleMod, 0) * Time.deltaTime;
             }
             
+        }
+        else
+        {
+            transform.localScale = new Vector3(10, 10, 1);
         }
 	}
 }

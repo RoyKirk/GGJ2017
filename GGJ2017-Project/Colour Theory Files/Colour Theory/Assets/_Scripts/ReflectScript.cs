@@ -19,10 +19,15 @@ public class ReflectScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        playerController = GetComponentInParent<PlayerControllerNew>();
-        player = playerController.player;
-        collider = GetComponent<BoxCollider>();
-        Physics.IgnoreCollision(GetComponentInParent<Collider>(), GetComponent<Collider>());
+        
+        if(!wall)
+        {
+            playerController = GetComponentInParent<PlayerControllerNew>();
+            player = playerController.player;
+            collider = GetComponent<BoxCollider>();
+            Physics.IgnoreCollision(GetComponentInParent<Collider>(), GetComponent<Collider>());
+        }
+        
     }
 
     // Update is called once per frame

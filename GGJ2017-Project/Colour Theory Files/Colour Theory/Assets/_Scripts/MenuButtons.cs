@@ -26,7 +26,7 @@ public class MenuButtons : MonoBehaviour
                 {
                     Title[i].GetComponent<Renderer>().material.color = Players[i].GetComponent<Renderer>().material.color;
                 }
-                //Letters[i].GetComponent<LetterFeedback>().animate = true;
+                Letters[i].GetComponent<LetterFeedback>().animate = true;
             }
             else
             {
@@ -35,6 +35,7 @@ public class MenuButtons : MonoBehaviour
                 {
                     Title[i].GetComponent<Renderer>().material.color = Color.white;
                 }
+                Letters[i].GetComponent<LetterFeedback>().animate = false;
             }
         }
 
@@ -47,9 +48,21 @@ public class MenuButtons : MonoBehaviour
         }
         if(iterator == 4)
         {
-            Debug.Log("all players ready");
+            //Debug.Log("all players ready");
+            currentStartTimer += Time.deltaTime;
+            if(currentStartTimer >= startTimer)
+            {
+                Application.LoadLevel(1);
+            }
+        }
+        else
+        {
+            currentStartTimer = 0;
         }
 	}
+
+    float startTimer = 3;
+    float currentStartTimer = 0;
 
     int iterator = 0;
 
