@@ -15,6 +15,8 @@ public class BuildingBlock : MonoBehaviour
 	public float colliderDelay;
 	float colliderTimer;
 
+	public GameObject material;
+
 	public bool toBeDemolished = false;
 
     bool vaporise = false;
@@ -50,8 +52,10 @@ public class BuildingBlock : MonoBehaviour
     }
 
     public void TakeDamage(float damage)
-    {
+	{
+		ControllerVibrate.Vibrate(1);
         health -= damage;
+		material.GetComponent<Renderer>().material.color = Color.red;
         Instantiate(explosion, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.Euler(new Vector3(90,0,0)));
         if (health <= 0)
         {

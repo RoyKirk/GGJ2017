@@ -111,22 +111,27 @@ public class LASERSegmentScript : MonoBehaviour {
 
             if (Physics.Raycast(transform.position, new Vector3(0, -1, 0), out hit, 1.0f))
             {
+                Debug.DrawRay(transform.position, new Vector3(0, -1, 0));
                 CollisionChecks(hit.collider);
             }
             else if (Physics.Raycast(transform.position + new Vector3(-0.45f, 0, 0), new Vector3(0, -1, 0), out hit, 1.0f))
             {
+                Debug.DrawRay(transform.position, new Vector3(-0.45f, 0, 0));
                 CollisionChecks(hit.collider);
             }
             else if (Physics.Raycast(transform.position + new Vector3(0.45f, 0, 0), new Vector3(0, -1, 0), out hit, 1.0f))
             {
+                Debug.DrawRay(transform.position, new Vector3(0.45f, 0, 0));
                 CollisionChecks(hit.collider);
             }
             else if (Physics.Raycast(transform.position + new Vector3(0, 0, -0.45f), new Vector3(0, -1, 0), out hit, 1.0f))
             {
+                Debug.DrawRay(transform.position, new Vector3(0, 0, -0.45f));
                 CollisionChecks(hit.collider);
             }
             else if (Physics.Raycast(transform.position + new Vector3(0, 0, 0.45f), new Vector3(0, -1, 0), out hit, 1.0f))
             {
+                Debug.DrawRay(transform.position, new Vector3(0, 0, 0.45f));
                 CollisionChecks(hit.collider);
             }
 
