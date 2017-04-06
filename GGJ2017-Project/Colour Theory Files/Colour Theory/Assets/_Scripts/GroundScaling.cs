@@ -10,6 +10,6 @@ public class GroundScaling : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        gameObject.transform.localScale -= new Vector3(Time.deltaTime * 0.01f,0, Time.deltaTime * 0.01f);
+        gameObject.transform.localScale -= new Vector3((Time.deltaTime * 0.01f) + 0.001f,0, (Time.deltaTime * 0.01f) + 0.001f);
 	}
 }
