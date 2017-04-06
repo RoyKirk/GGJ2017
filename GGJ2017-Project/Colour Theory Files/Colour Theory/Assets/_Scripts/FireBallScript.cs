@@ -64,6 +64,9 @@ public class FireBallScript : MonoBehaviour
     public float ExplosiveForce;
     public float Radius;
 
+    public float velocityScale;
+    public float ExplosiveScale;
+
     void OnCollisionEnter(Collision c)
     {
         if(c.gameObject.tag == "Player" || c.gameObject.tag == "Object")
@@ -75,9 +78,9 @@ public class FireBallScript : MonoBehaviour
             if(c.rigidbody != null)
             {
                 //Debug.Log("hit player");
-                c.rigidbody.AddExplosionForce(ExplosiveForce, transform.position, Radius);
+                c.rigidbody.AddExplosionForce(ExplosiveForce * ExplosiveScale, transform.position, Radius);
                 //c.rigidbody.AddExplosionForce(ExplosiveForce, Rb.velocity, Radius);
-                c.rigidbody.AddForce(Rb.velocity / 2);// + transform.rotation.eulerAngles);
+                c.rigidbody.AddForce(Rb.velocity / velocityScale);// + transform.rotation.eulerAngles);
                                                   //c.rigidbody.AddForce(c.impulse);
                                                   //c.rigidbody.velocity += Rb.velocity;
                 

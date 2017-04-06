@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colour Theory", "Assembly-CSharp-firstpass.csproj", "{FE05B91E-E342-9BD5-E0DE-499E1DB09A76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colour Theory", "Assembly-CSharp.csproj", "{14B46086-C54B-4877-5ED5-2CEC637BBAB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Colour Theory", "Assembly-CSharp-Editor.csproj", "{F6C3A1B8-E1B5-125A-C6C4-D6981E038ECB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE05B91E-E342-9BD5-E0DE-499E1DB09A76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE05B91E-E342-9BD5-E0DE-499E1DB09A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE05B91E-E342-9BD5-E0DE-499E1DB09A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE05B91E-E342-9BD5-E0DE-499E1DB09A76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14B46086-C54B-4877-5ED5-2CEC637BBAB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14B46086-C54B-4877-5ED5-2CEC637BBAB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14B46086-C54B-4877-5ED5-2CEC637BBAB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14B46086-C54B-4877-5ED5-2CEC637BBAB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6C3A1B8-E1B5-125A-C6C4-D6981E038ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6C3A1B8-E1B5-125A-C6C4-D6981E038ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6C3A1B8-E1B5-125A-C6C4-D6981E038ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6C3A1B8-E1B5-125A-C6C4-D6981E038ECB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
